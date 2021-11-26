@@ -80,6 +80,7 @@ export default {
             row.editModeEnabled = true
         },
         input(val){
+            console.log(val)
         }
     },
     async created(){
