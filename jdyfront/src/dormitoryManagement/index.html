@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum=1.0,minimum=1.0,user-scalable=0" />
+    <title>宿舍管理平台</title>
+  <link rel="stylesheet" href="https://object.risen.com/public/resources/element-ui/2.15.5/lib/theme-chalk/index.css"  charset="utf-8">
+    <script src="https://object.risen.com/public/resources/jquery/3.6.0/jquery-3.6.0.min.js"></script>
+    <style type="text/css" media="screen">
+        .hover{
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.50);
+            z-index: 10;
+        }
+        .displayNone{
+            display: none;
+        }
+        .wrap{
+            width: 76%;
+            /*height: 160px;*/
+            background-color: #fff;
+            border-radius: 8px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translateX(-50%) translateY(-50%);
+            overflow: hidden;
+        }
+        .title{
+            height: 25px;
+            line-height: 25px;
+            margin-top: 12px;
+            text-align: center;
+            font-size: 18px;
+            color: #333333;
+            font-weight: bold;
+        }
+        #input{
+            width: 92%;
+            height: 36px;
+            line-height: 36px;
+            margin: 20px 4% 0;
+            padding: 0;
+            font-size: 15px;
+            border: 1px solid #E5E5E5;
+            border-radius: 2px;
+            text-indent: 12px;
+            outline: none;
+            -webkit-appearance: none;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+        #input::placeholder{
+            color: #CCCCCC;
+        }
+        .button_wrap{
+            height: 50px;
+            border-top: 1px solid #E5E5E5;
+            display: flex;
+            margin-top: 20px;
+        }
+        .button{
+            flex: 1;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            font-size: 18px;
+            background-color: #fff;
+        }
+        .button.cancel{
+            color: #999999;
+        }
+        .button.sure{
+            color: #1677FF;
+        }
+        .button:active{
+            background-color: #eee;
+        }
+        .between{
+            width: 1px;
+            height: 50px;
+            background-color: #E5E5E5;
+        }
+
+        .toast{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            background-color: #000;
+            color: #fff;
+            z-index: 50;
+            padding: 5px 10px;
+            height: 20px;
+            line-height: 20px;
+            transform: translateX(-50%) translateY(-50%);
+            border-radius: 3px;
+        }
+@media screen and (min-width: 600px) {
+    .wrap{
+        width: 600px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+    }
+}
+    </style>
+</head>
+<body>
+<div id="app" >
+      <two-col
+          :gutter="gutter"
+          :cit="cit1"
+          :margin="margin"
+          :layout="layout"
+          v-on:open_url="open_url">
+      </two-col>
+      <rolling-ball
+          :position="position"
+          ></rolling-ball>
+      <div class="hover displayNone">
+            <div class="wrap">
+                <div class="title">请输入管理员账号</div>
+                <input id="input" placeholder="管理员手机号">
+                <div class="button_wrap">
+                    <div class="button cancel" onclick="toCancel()">取消</div>
+                    <div class="between"></div>
+                    <div class="button sure" onclick="toSure()">确定</div>
+                </div>
+            </div>
+      </div>
+      <div class="toast displayNone">请输入管理员账号</div>
+</div>
+
+</body>
+<script src="https://object.risen.com/jdyapp/public/js/jdy_mixin.js"></script>
+<script src="https://object.risen.com/jdyapp/public/js/twoCol.js"></script>
+<script src="https://object.risen.com/jdyapp/public/js/rollingBall.js"></script>
+  <!-- import Vue before Element -->
+<script src="https://object.risen.com/public/resources/vue/2.6.14/dist/vue.min.js"></script>
+<script src="https://object.risen.com/public/resources/vue-router/3.5.2/dist/vue-router.min.js"></script>
+<!-- import JavaScript -->
+<script src="https://object.risen.com/public/resources/element-ui/2.15.5/lib/index.js"></script>
+<script src="https://object.risen.com/public/resources/vue/2.6.14/dist/vue.min.js"></script>
+<script src="https://object.risen.com/public/resources/vue-router/3.5.2/dist/vue-router.min.js"></script>
+<!-- import JavaScript -->
+<script src="https://object.risen.com/public/resources/element-ui/2.15.5/lib/index.js"></script>
+<script>
+function toSure(url, flag) {
+    flag = flag.split(',')
+    let value = $('#input').val()
+    if (value === '') {
+        $('.toast').fadeIn()
+        $('.toast').html('请输入管理员账号')
+        setTimeout(function () {
+            $('.toast').fadeOut()
+        }, 2000)
+        return
+    }
+    let index = 0
+    flag.forEach(item => {
+        if (obj[item].indexOf(value) >= 0) {
+            index++
+        }
+    })
+    if (index === 0) {
+        $('.toast').fadeIn()
+        $('.toast').html('您没有权限访问该模块')
+        setTimeout(function () {
+            $('.toast').fadeOut()
+        }, 2000)
+        return
+    }
+    $('.hover').addClass('displayNone')
+    window.open(url)
+}
+function toCancel() {
+    $('.hover').addClass('displayNone')
+}
+</script>
+<script>
+var obj = {
+    a: ['15168569439', '13968330399', '15958835158', '15990585158'], // 行政
+    b: ['15168560571', '15869306190', '13736188432'], // 宿管
+    c: ['13998358019', '18312985969'], // 维修
+    d: ['18616332738', '13795332409', '18106693536', '15779897737'], // IT
+}
+var config = {
+    baseUrl:"https://object.risen.com/jdyapp/dormitoryManage/images/",
+    cit: [
+        {
+            id: 1,
+            picUrl: "ssdj@3x.jpg",
+            jumpUrl:"https://tqs0cvli0t.jiandaoyun.com/f/5f1e7663c637ca00068b6f4d",
+        },
+        {
+            id: 2,
+            picUrl: "wxsq@3x.jpg",
+            jumpUrl:"https://tqs0cvli0t.jiandaoyun.com/f/5f3c849b9c8b6200068f9cdd",
+        },
+        {
+            id: 3,
+            picUrl: "rzcx@3x.jpg",
+            jumpUrl:"https://tqs0cvli0t.jiandaoyun.com/q/5f1e7663c637ca00068b6f4d",
+        },
+        {
+            id: 4,
+            picUrl: "wxjg@3x.jpg",
+            jumpUrl:"https://tqs0cvli0t.jiandaoyun.com/f/5f3b45cd364546000698e2ea",
+        },
+        {
+            id: 5,
+            picUrl: "tssq@3x.jpg",
+            jumpUrl:"https://tqs0cvli0t.jiandaoyun.com/f/5f504bae26170c00065eff5e",
+        }:,
+        {
+            id: 6,
+            picUrl: "wxqk@3x.jpg",
+            jumpUrl:"https://tqs0cvli0t.jiandaoyun.com/q/5f3b45cd364546000698e2ea",
+        },
+        {
+            id: 7,
+            picUrl: "sszt@3x.jpg",
+            jumpUrl:"https://tqs0cvli0t.jiandaoyun.com/dash/5f505cbd65f0d200062f7510",
+            flag: "a,b,c,d",
+        },
+        {
+            id: 8,
+            picUrl: "fjzt@3x.jpg",
+            jumpUrl:"https://tqs0cvli0t.jiandaoyun.com/dash/5f5b4d80623ae0000645f69f",
+            flag: "a,b,d",
+        },
+        {
+            id: 9,
+            picUrl: "wply@3x.png",
+            jumpUrl:"https://tqs0cvli0t.jiandaoyun.com/f/60334fe6381f330007230ed3",
+        },
+        {
+            id: 10,
+            picUrl: "white@3x.png",
+        },
+    ],
+    gutter:"20",
+    layout:{
+        xs:[0,12,12,0],
+        sm:[0,12,12,0],
+        md:[0,4,4,0],
+        lg:[0,4,4,0],
+        xl:[0,4,4,0]
+    },
+    margin: "margin: 5px 0 5px 0",
+    position: "right:0px;top:200px;"
+}
+    
+var app = new Vue({
+  el:'#app',
+  // getElement,transform2d from jdy_mixin
+  mixins: [jdy_mixin],
+  components: {TwoCol,RollingBall},
+  created(){
+    const cit = this.cit;
+    that = this;
+    cit.forEach(function(item){
+        item.picUrl = that.baseUrl + item.picUrl
+    })
+  },
+  computed:{
+      cit1(){
+          return this.transform2d(this.cit); 
+      }
+  },
+  methods: {
+    open_url(event) {
+        let result = this.getElement(event);
+        let url = result.jumpUrl;
+        let flag = result.flag;
+        this._openUrl(url, flag);
+    },
+    _openUrl(url,flag) {
+        if (flag) {
+            $('.hover').removeClass('displayNone')
+            $('.hover .sure').attr('onclick', `toSure('${url}', '${flag}')`)
+        } else {
+            if(url){
+                window.open(url)
+            }
+        }
+    },
+  },
+  data: {
+    "baseUrl":config.baseUrl,
+    "cit": config.cit,
+    "layout":config.layout,
+    "margin":config.margin,
+    "gutter":config.gutter,
+    "position":config.position,
+    "obj":obj,
+  }
+})
+</script>
+</html>
+

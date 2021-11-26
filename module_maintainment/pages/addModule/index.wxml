@@ -1,0 +1,73 @@
+<!--index.wxml-->
+<view class="container-body">
+    <view class="barcode">
+         <!-- <van-cell-group> -->
+          <van-field
+            value="{{ barcode }}"
+            error="{{barcodeError}}"
+            center
+            disabled
+            clearable
+            label="barcode"
+            placeholder="please enter barcode"
+            border="{{ false }}"
+            right-icon="scan"
+            bind:click-icon = "scan"
+          >
+          </van-field>
+        <!-- </van-cell-group> --> 
+    </view>
+   <view class="barcode">
+        <van-field 
+            value="{{ location }}" 
+            center 
+            disabled
+            placeholder="please get the location"
+            label="location" 
+            right-icon="location"
+            border="{{ false }}"
+            bind:click-icon = "getLocation"
+        >
+        </van-field>
+     
+   </view> 
+    <view class="before" style="background:white">
+        <van-row custom-class="">
+            
+            <van-col span="12" custom-class="content">
+            <view class="title">
+              BEFORE 
+            </view>
+            <view class="">
+              <input bindinput="beforeInput" class="weui-input custom-input" maxlength="10" placeholder="Voltage (V)" />
+            </view>
+            </van-col>
+            <van-col span="12" >
+                <view class="upload">
+                    <van-uploader 
+                      file-list="{{ fileList }}" 
+                      bind:after-read="afterRead" 
+                      max-count="1"
+                      bind:delete="deleteImage"
+                      preview-size="280rpx"
+                    />
+                </view>
+                <view class="upload">
+                    <van-uploader 
+                      file-list="{{ fileList1 }}" 
+                      bind:after-read="afterRead1" 
+                      max-count="1"
+                      bind:delete="deleteImage1"
+                      preview-size="280rpx"
+                    />
+                </view>
+            </van-col>
+        </van-row>
+    </view>
+    <view class="koo-inline-container--center save_button">
+    <van-button round size="large" custom-class="" color="#1e3485" bind:click="save">S A V E</van-button>
+    </view>
+    <van-dialog 
+        id="van-dialog"
+        />
+</view>

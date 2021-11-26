@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum=1.0,minimum=1.0,user-scalable=0">
+<title>设备管理与巡检平台</title>
+  <!-- import CSS -->
+  <link rel="stylesheet" href="https://object.risen.com/public/resources/element-ui/2.15.5/lib/theme-chalk/index.css"  charset="utf-8">
+  <script src="https://object.risen.com/public/resources/jquery/3.6.0/jquery-3.6.0.min.js"></script>
+<style>
+.displayNone{
+    display: none;
+}
+.toast{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-color: #000;
+    color: #fff;
+    z-index: 50;
+    padding: 5px 10px;
+    height: 20px;
+    line-height: 20px;
+    transform: translateX(-50%) translateY(-50%);
+    border-radius: 3px;
+}
+@media screen and (min-width: 600px) {
+    .wrap{
+        width: 600px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+    }
+}
+</style>
+</head>
+<body>
+  <div id="app" class="wrap">
+      <two-col
+          :gutter="gutter"
+          :cit="cit1"
+          :margin="margin"
+          :layout="layout"
+          v-on:open_url="open_url">
+      </two-col>
+        <div class="toast displayNone"></div>
+  </div>
+  <script>
+
+</script>
+</body>
+<script src="https://object.risen.com/jdyapp/public/js/jdy_mixin.js"></script>
+<script src="https://object.risen.com/jdyapp/public/js/twoCol.js"></script>
+  <!-- import Vue before Element -->
+<script src="https://object.risen.com/public/resources/vue/2.6.14/dist/vue.min.js"></script>
+<script src="https://object.risen.com/public/resources/vue-router/3.5.2/dist/vue-router.min.js"></script>
+<!-- import JavaScript -->
+<script src="https://object.risen.com/public/resources/element-ui/2.15.5/lib/index.js"></script>
+<script>
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+        if (r != null) return unescape(r[2]); return null; //返回参数值
+    }
+</script>
+<script>
+var config ={
+    baseUrl:"https://object.risen.com/jdyapp/equipmentManagement/images/",
+     cit: [
+        {   
+            id : 1,
+            picUrl : "zjwx@3x.png",
+            jumpUrl : "https://www.jiandaoyun.com/app/5f3e119f3a1e7c0006203414/entry/5f1012866b3ffa000627f6d6",
+            flag :"bxwx",
+        },
+        {   
+            id : 2,
+            jumpUrl : "https://www.jiandaoyun.com/app/5f3e119f3a1e7c0006203414/entry/5f237219f290f90006edb6fa",
+            picUrl : "sbbx@3x.png",
+            flag :"bxwx",
+        },
+        {   
+            id : 3,
+            picUrl : "bjly@3x.png",
+            jumpUrl: "https://www.jiandaoyun.com/app/5f3e119f3a1e7c0006203414/entry/5edef9ed76c64d0006b15a61",
+            flag :"bpbj",
+        },
+        {   
+            id : 4,
+            picUrl : "bjrk@3x.png",
+            jumpUrl: "https://www.jiandaoyun.com/app/5f3e119f3a1e7c0006203414/entry/5edc9c5a7bdfd80006405101",
+            flag :"bpbj",
+        },
+        {
+            id: 5,
+            picUrl :"bpbjqg@3x.png", 
+            jumpUrl: "https://www.jiandaoyun.com/app/5f3e119f3a1e7c0006203414/entry/5edc9c5a7bdfd80006405101",
+            flag:"cggl",
+        },
+        {
+            id: 6,
+            picUrl :"bjbhsq@3x.png", 
+            jumpUrl: "https://www.jiandaoyun.com/app/5f3e119f3a1e7c0006203414/entry/5edc9d3bfea4b80006f79bcd",
+            flag:"cggl",
+        },
+        {
+            id: 7,
+            picUrl :"sbxj@3x.png", 
+            jumpUrl: "",
+            flag:"djxj",
+            unuse:true,
+        },
+    ],
+    gutter:"20",
+    layout:{
+        xs:[0,12,12,0],
+        sm:[0,12,12,0],
+        md:[0,8,8,0],
+        lg:[0,8,8,0],
+        xl:[0,8,8,0]
+    },
+    margin: "margin: 5px 0 5px 0",
+}
+var app = new Vue({
+  el: '#app',
+  // getElement,transform2d from jdy_mixin
+  mixins: [jdy_mixin],
+  components: {TwoCol},
+  created(){
+    const cit = this.cit;
+    that = this;
+    cit.forEach(function(item){
+        item.picUrl = that.baseUrl + item.picUrl
+    })
+  },
+  computed:{
+      cit1(){
+          const flag = getUrlParam('flag');
+          const cit = this.cit.filter(item => item.flag === flag)
+          return this.transform2d(cit); 
+      }
+  },
+  methods: {
+    open_url(event) {
+        let result = this.getElement(event);
+        let url = result.jumpUrl;
+        let unuse = result.unuse;
+        if (unuse)
+        {
+            this._openUrl(url,unuse)
+        }else
+        {
+            this._openUrl(url)
+        }
+    },
+     _openUrl(url, unuse = false) {
+        if (unuse) {
+            $('.toast').fadeIn()
+            $('.toast').html('该功能暂不开放')
+            setTimeout(function () {
+                $('.toast').fadeOut()
+            }, 2000)
+            return
+        }
+        window.open(url)
+    }
+  },
+  data: {
+    "baseUrl":config.baseUrl,
+    "cit": config.cit,
+    "layout":config.layout,
+    "margin":config.margin,
+    "gutter":config.gutter,
+  }
+
+})
+</script>
+</html>

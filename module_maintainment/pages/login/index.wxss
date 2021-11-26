@@ -1,0 +1,83 @@
+/* pages/editUserInfo/editUserInfo.wxss */
+/* pages/register/index.wxss */
+.container {
+  padding: 45px 0px 20px;
+}
+
+
+.title-text {
+  display: inline-block;
+  vertical-align: middle;
+}
+.register-wrapper {
+  margin-top: 70rpx;
+}
+.editUserInfo-button{
+  width:350rpx;
+}
+
+.title {
+  padding-left: 15px;
+  margin-bottom: 10px;
+}
+
+.title-text {
+  font-size: 38rpx;
+  font-weight: 500;
+  margin-left: 15px;
+}
+
+.logo {
+  width: 36px;
+  height: 36px;
+}
+.content-abbr{
+  flex-direction:row;
+  display:flex;
+}
+.content-abbr-title{
+    flex:1;
+}
+.desc {
+  font-size: 14px;
+  color: #7d7e80;
+  margin: 0 0 45px;
+  padding-left: 15px;
+}
+.info{
+  font-size:28rpx;
+  color: gray;
+  height:80rpx;
+  line-height: 80rpx;
+  margin-bottom: 30rpx
+}
+.button{
+  width: 200rpx;
+  margin-bottom: 40rpx
+}
+.stitle{
+  font-size:30rpx;
+  height:80rpx;
+  line-height: 80rpx
+}
+.field-abbr{
+  /* width:126px; */
+}
+.cell-value{
+  color:red;
+  font-weight:bold;
+  font-size:40rpx;
+}
+.disableInput{
+  width:60px;
+  background-color:#778899;  
+  border-radius: 15px;
+}
+.input{
+  width:60px;
+  background-color:#FFF0F5;
+  border-radius: 15px;
+}
+.checkbox_title{
+   flex:0.45!important; 
+}

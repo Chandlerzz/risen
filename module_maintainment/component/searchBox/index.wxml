@@ -1,0 +1,10 @@
+<!--component/searchBox/index.wxml-->
+<view class="wrapper">
+    <slot></slot>
+    <view class='tit_seabox'>
+        <view class="tit_seabox_bar {{}}">
+            <icon type='search' size="32rpx"></icon>
+            <input focus="{{inputFocus}}" disabled="{{inputDisable}}" type="text" bindinput="searchList" bindconfirm="endsearchList" bindfocus='getfocus' bindblur="blursearch" confirm-type='search' value='{{searchstr}}' placeholder='{{placeholderValue}}' />
+        </view>
+    </view>
+</view>

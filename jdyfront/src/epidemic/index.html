@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum=1.0,minimum=1.0,user-scalable=0">
+<title>日升疫情通</title>
+  <!-- import CSS -->
+
+  <link rel="stylesheet" href="https://object.risen.com/public/resources/element-ui/2.15.5/lib/theme-chalk/index.css"  charset="utf-8">
+    <script src="https://object.risen.com/public/resources/jquery/3.6.0/jquery-3.6.0.min.js"></script>
+<style>
+@media screen and (min-width: 600px) {
+    .wrap{
+        width: 600px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+    }
+}
+</style>
+</head>
+<body>
+  <div id="app" class="wrap">
+      <two-col
+          :gutter="gutter"
+          :cit="cit1"
+          :margin="margin"
+          :layout="layout"
+          v-on:open_url="open_url">
+      </two-col>
+      <rolling-ball
+          :position="position"
+          ></rolling-ball>
+  </div>
+</body>
+<script src="https://object.risen.com/jdyapp/public/js/jdy_mixin.js"></script>
+<script src="https://object.risen.com/jdyapp/public/js/twoCol.js"></script>
+<script src="https://object.risen.com/jdyapp/public/js/rollingBall.js"></script>
+  <!-- import Vue before Element -->
+<script src="https://object.risen.com/public/resources/vue/2.6.14/dist/vue.min.js"></script>
+<script src="https://object.risen.com/public/resources/vue-router/3.5.2/dist/vue-router.min.js"></script>
+<!-- import JavaScript -->
+<script src="https://object.risen.com/public/resources/element-ui/2.15.5/lib/index.js"></script>
+<script>
+var config ={
+  baseUrl:"https://object.risen.com/jdyapp/epidemic/images/",
+  cit: [
+      {
+        id:1,
+        picUrl:"cjfx@3x.png",
+        jumpUrl:"https://tqs0cvli0t.jiandaoyun.com/f/6019f243a3aaa40007baff07",
+        },
+      {
+        id:2,
+        picUrl:"jkbb@3x.png",
+        jumpUrl:"https://tqs0cvli0t.jiandaoyun.com/f/6019f243a3aaa40007baff06",
+        },
+      {
+        id:3,
+        picUrl:"jhfg@3x.png",
+        jumpUrl:"https://tqs0cvli0t.jiandaoyun.com/f/6019f498d872b80008e9f0d0",
+        },
+      {
+        id:4,
+        picUrl:"ccdj@3x.png",
+        jumpUrl:"https://tqs0cvli0t.jiandaoyun.com/f/6019f243a3aaa40007baff08",
+        },
+      {
+        id:5,
+        picUrl:"wlbf@3x.png",
+        jumpUrl:"https://tqs0cvli0t.jiandaoyun.com/f/6019f243a3aaa40007baff09",
+        },
+      {
+        id:6,
+        picUrl:"white@3x.png",
+        },
+      {
+        id:7,
+        picUrl:"yxm@3x.png",
+        },
+      {
+        id:8,
+        picUrl:"zwfw@3x.png",
+        },
+    ],
+    gutter:"20",
+    layout:{
+        xs:[0,12,12,0],
+        sm:[0,12,12,0],
+        md:[0,8,8,0],
+        lg:[0,8,8,0],
+        xl:[0,8,8,0]
+    },
+    margin: "margin: 5px 0 5px 0",
+    position: "right:0px;top:200px;"
+};
+var app = new Vue({
+  el: '#app',
+  mixins: [jdy_mixin],
+  components: {TwoCol,RollingBall},
+  created(){
+    const cit = this.cit;
+    that = this;
+    cit.forEach(function(item){
+        item.picUrl = that.baseUrl + item.picUrl
+    })
+  },
+  computed:{
+      cit1(){
+          return this.transform2d(this.cit); 
+      }
+  },
+  methods: {
+     open_url(event) {
+        let result = this.getElement(event);
+        let url = result.jumpUrl;
+        this._openUrl(url);
+     },
+     _openUrl(url){
+        if(url){
+            window.open(url);
+        }
+     }
+  },
+  data: {
+    "baseUrl":config.baseUrl,
+    "cit": config.cit,
+    "layout":config.layout,
+    "margin":config.margin,
+    "gutter":config.gutter,
+    "position":config.position,
+  }
+
+})
+</script>
+</html>

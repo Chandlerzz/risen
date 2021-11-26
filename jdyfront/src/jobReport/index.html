@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum=1.0,minimum=1.0,user-scalable=0">
+<title>述职评价平台</title>
+  <!-- import CSS -->
+  <link rel="stylesheet" href="https://object.risen.com/public/resources/element-ui/2.15.5/lib/theme-chalk/index.css"  charset="utf-8">
+  <script src="https://object.risen.com/public/resources/jquery/3.6.0/jquery-3.6.0.min.js"></script>
+<style>
+html, body{
+    margin: 0;
+    padding: 0;
+    background-color: #0A2C66;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+@media screen and (min-width: 600px) {
+    .wrap{
+        width: 600px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+    }
+}
+
+</style>
+</head>
+<body>
+  <div id="app" class = "wrap">
+      <two-col
+          :gutter="gutter"
+          :cit="cit1"
+          :margin="margin"
+          :layout="layout"
+          v-on:open_url="open_url">
+      </two-col>
+      <rolling-ball
+          :position="position"
+          ></rolling-ball>
+  </div>
+  <script>
+
+</script>
+</body>
+<script src="https://object.risen.com/jdyapp/public/js/jdy_mixin.js"></script>
+<script src="https://object.risen.com/jdyapp/public/js/twoCol.js"></script>
+<script src="https://object.risen.com/jdyapp/public/js/rollingBall.js"></script>
+  <!-- import Vue before Element -->
+<script src="https://object.risen.com/public/resources/vue/2.6.14/dist/vue.min.js"></script>
+<script src="https://object.risen.com/public/resources/vue-router/3.5.2/dist/vue-router.min.js"></script>
+<!-- import JavaScript -->
+<script src="https://object.risen.com/public/resources/element-ui/2.15.5/lib/index.js"></script>
+<script>
+var config={
+    baseUrl:"https://object.risen.com/jdyapp/jobReport/images/",
+    cit:[
+        {   
+            id : 1,
+            picUrl : "qd@3x.png",
+            jumpUrl: "https://www.jiandaoyun.com/app/5f812888954b6000068bda99/entry/5f98de1d96a94c0006230f59",
+        },
+        {   
+            id : 2,
+            picUrl : "lc@3x.png",
+            jumpUrl: "https://s1.ax1x.com/2020/11/06/BfIrOP.jpg",
+            type: "image",
+            rotate: 0,
+            title :"会议流程",
+        },
+        {   
+            id : 3,
+            picUrl : "zw@3x.png",
+            jumpUrl: "https://s1.ax1x.com/2020/11/06/Bf5hqK.jpg",
+            type: 'image', 
+            rotate: 90,
+            title: '座位查询',
+        },
+        {   
+            id : 4,
+            picUrl : "sz@3x.png",
+            jumpUrl: "https://www.jiandaoyun.com/app/5f812888954b6000068bda99/entry/5f9fc6698b2fc90006456f62",
+        },
+        {   
+            id : 5,
+            picUrl : "cx@3x.png",
+            jumpUrl: "https://tqs0cvli0t.jiandaoyun.com/q/5f9fc6698b2fc90006456f63",
+        },
+//        {   
+//            id : 6,
+//            picUrl : "sz@3x.png",
+//            jumpUrl: "",
+//            hidden: true,
+//        },
+    ],
+    gutter:"60",
+    layout:{
+        xs:[0,9,9,0],
+        sm:[0,9,9,0],
+        md:[0,6,6,0],
+        lg:[0,6,6,0],
+        xl:[0,6,6,0]
+    },
+    margin: "margin: 20px 0 20px 0",
+    position: "right:0px;top:200px;background-color:#2C4097;opacity:0.8;"
+}
+var app = new Vue({
+  el: '#app',
+  mixins: [jdy_mixin],
+  components: {TwoCol,RollingBall},
+  created(){
+    const cit = this.cit;
+    that = this;
+    cit.forEach(function(item){
+        item.picUrl = that.baseUrl + item.picUrl
+    })
+  },
+  computed:{
+      cit1(){
+          return this.transform2d(this.cit); 
+      }
+  },
+  methods: {
+     open_url(event) {
+        let result = this.getElement(event);
+        let url = result.jumpUrl;
+        this._openUrl(url);
+     },
+     _openUrl(url){
+        if(url){
+            window.open(url)
+        }
+    }
+  },
+  data: {
+    "baseUrl":config.baseUrl,
+    "cit": config.cit,
+    "layout":config.layout,
+    "margin":config.margin,
+    "gutter":config.gutter,
+    "position":config.position,
+  }
+
+})
+</script>
+</html>

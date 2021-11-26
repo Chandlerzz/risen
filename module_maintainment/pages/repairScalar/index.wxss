@@ -1,0 +1,30 @@
+/**index.wxss**/
+.container-body{
+    background:#f8f8f8;
+    position: fixed;
+    height:100%;
+    width:100%;
+}
+.custom-input{
+    border-bottom: 0.1px solid #ebebeb;
+    width: 85px;
+}
+.barcode{
+    margin:0 0 30px 0;
+}
+.upload{
+    margin:10px 0px 10px 30px;
+}
+.before{
+    margin:0px 0px 30px 0;
+}
+.title{
+    margin:0px 0 20px 0;
+}
+.content{
+    padding:15px 0 0 10px ! important;
+}
+.save_button{
+    margin:40px;
+}
+

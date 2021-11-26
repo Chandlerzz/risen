@@ -1,0 +1,13 @@
+<!-- pages/index/index.wxml -->
+<wxs src="../../filters/date.wxs" module="date" />
+<scroll-view  scroll-y>
+    <koo-block  wx:if ="{{lists.length > 0}}" title="Repair Detail">
+            <block wx:key="id" wx:for="{{ lists }}">
+                <koo-repair 
+                    wx:if="{{item.state}}" 
+                    item="{{item}}"
+                    bind:tap="showLesson">
+                </koo-repair>
+            </block>
+    </koo-block>
+</scroll-view>

@@ -1,0 +1,6 @@
+/*todo 这里修改了图标的大小 原先为50rpx 2021.3.11 尤*/
+
+.icon {
+  width:90rpx;
+  height:90rpx;
+}

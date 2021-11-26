@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum=1.0,minimum=1.0,user-scalable=0">
+<title>采购询比价</title>
+  <!-- import CSS -->
+  <link rel="stylesheet" href="https://object.risen.com/public/resources/element-ui/2.15.5/lib/theme-chalk/index.css"  charset="utf-8">
+  <script src="https://object.risen.com/public/resources/jquery/3.6.0/jquery-3.6.0.min.js"></script>
+  <script src="https://object.risen.com/public/resources/clipboard/2.0.8/clipboard.min.js"></script>
+  <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet"/>
+<style>
+.displayNone{
+    display: none;
+}
+.button {
+    width:100px;
+    background-color: #4CAF50; /* Green */
+    margin: 0 20px;
+    border: none;
+    color: white;
+    padding: 5px 7px;
+    border-radius: 4px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+.toast{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-color: #000;
+    color: #fff;
+    z-index: 50;
+    padding: 5px 10px;
+    height: 20px;
+    line-height: 20px;
+    transform: translateX(-50%) translateY(-50%);
+    border-radius: 3px;
+}
+@media screen and (min-width: 600px) {
+    .wrap{
+        width: 600px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+    }
+}
+</style>
+</head>
+<body>
+  <div id="app" class="wrap">
+      <one-col
+          :gutter="gutter"
+          :cit="cit"
+          :margin="margin"
+          :layout="layout"
+          v-on:open_url="open_url">
+      </one-col>
+      <rolling-ball
+          :position="position"
+      ></rolling-ball>
+        <div class="toast displayNone"></div>
+        <marquee style="margin:0 27px">
+            <span style="font-weight: bolder;font-size: 20px;color: red;">此网页将于2021-09-31停止使用，点击按钮复制最新访问链接：</span>
+        </marquee>
+        <!-- Trigger -->
+        <button class="button button" data-clipboard-text="https://esbtest.risen.com/dev/v1/jdy_price_comparison">
+               点击复制 
+        </button>
+  </div>
+  <script>
+
+</script>
+</body>
+<script src="https://object.risen.com/jdyapp/public/js/jdy_mixin.js"></script>
+<script src="https://object.risen.com/jdyapp/public/js/oneCol.js"></script>
+<script src="https://object.risen.com/jdyapp/public/js/rollingBall.js"></script>
+  <!-- import Vue before Element -->
+<script src="https://object.risen.com/public/resources/vue/2.6.14/dist/vue.min.js"></script>
+<script src="https://object.risen.com/public/resources/vue-router/3.5.2/dist/vue-router.min.js"></script>
+<!-- import JavaScript -->
+<script src="https://object.risen.com/public/resources/element-ui/2.15.5/lib/index.js"></script>
+<script>
+$('button').tooltip({
+    trigger: 'click',
+    placement: 'bottom'
+});
+
+function setTooltip(btn, message) {
+    $(btn).tooltip('hide')
+    .attr('data-original-title', message)
+    .tooltip('show');
+}
+
+function hideTooltip(btn) {
+    setTimeout(function() {
+        $(btn).tooltip('hide');
+   }, 1000);
+}
+
+// Clipboard
+
+var clipboard = new ClipboardJS('button');
+
+clipboard.on('success', function(e) {
+    setTooltip(e.trigger, 'Copied!');
+    hideTooltip(e.trigger);
+});
+
+clipboard.on('error', function(e) {
+    setTooltip(e.trigger, 'Failed!');
+    hideTooltip(e.trigger);
+});
+var config ={
+    baseUrl:"https://object.risen.com/jdyapp/priceComparison/images/",
+     cit: [
+        {   
+            id : 1,
+            picUrl : "gyszc@3x.jpg",
+            jumpUrl : "https://tqs0cvli0t.jiandaoyun.com/f/5f5995d09a2f960006fc4e44",
+        },
+        {   
+            id : 2,
+            jumpUrl : "http://dvs.risenenergy.com/webroot/decision/view/report?viewlet=%25E4%25B8%259C%25E6%2596%25B9%25E6%2597%25A5%25E5%258D%2587%25E6%2596%25B0%25E8%2583%25BD%25E6%25BA%2590%25E8%2582%25A1%25E4%25BB%25BD%25E6%259C%2589%25E9%2599%2590%25E5%2585%25AC%25E5%258F%25B8%2528%25E9%259B%2586%25E5%259B%25A2%2529%252FJT18_%25E9%2587%2587%25E8%25B4%25AD%25E8%25AF%25A2%25E6%25AF%2594%25E4%25BB%25B7%252F%25E4%25BE%259B%25E5%25BA%2594%25E5%2595%2586%25E6%258A%25A5%25E4%25BB%25B7%25E7%25AE%25A1%25E7%2590%2586%252F%25E8%25AF%25B7%25E8%25B4%25AD%25E5%258D%2595%25E6%259F%25A5%25E8%25AF%25A2.cpt&ref_t=design&op=view&ref_c=acab7738-a348-413e-a2b5-57e9141af5ac",
+            picUrl : "qgdcx@3x.jpg",
+        },
+        {   
+            id : 3,
+            picUrl : "gysbj@3x.jpg",
+            jumpUrl: "http://dvs.risenenergy.com/webroot/decision/view/report?viewlet=%25E4%25B8%259C%25E6%2596%25B9%25E6%2597%25A5%25E5%258D%2587%25E6%2596%25B0%25E8%2583%25BD%25E6%25BA%2590%25E8%2582%25A1%25E4%25BB%25BD%25E6%259C%2589%25E9%2599%2590%25E5%2585%25AC%25E5%258F%25B8%2528%25E9%259B%2586%25E5%259B%25A2%2529%252FJT18_%25E9%2587%2587%25E8%25B4%25AD%25E8%25AF%25A2%25E6%25AF%2594%25E4%25BB%25B7%252F%25E4%25BE%259B%25E5%25BA%2594%25E5%2595%2586%25E6%258A%25A5%25E4%25BB%25B7%25E7%25AE%25A1%25E7%2590%2586%252F%25E4%25BE%259B%25E5%25BA%2594%25E5%2595%2586%25E6%258A%25A5%25E4%25BB%25B7.cpt&ref_t=design&op=write&ref_c=acab7738-a348-413e-a2b5-57e9141af5ac",
+        },
+    ],
+    gutter:"20",
+    layout:{
+        xs:[0,22,0],
+        sm:[0,22,0],
+        md:[0,22,0],
+        lg:[0,22,0],
+        xl:[0,22,0]
+    },
+    margin: "margin: 5px 0 5px 0",
+    position: "right:0px;top:200px;"
+}
+var app = new Vue({
+  el: '#app',
+  // getElement,transform2d from jdy_mixin
+  mixins: [jdy_mixin],
+  components: {OneCol,RollingBall},
+  created(){
+    const cit = this.cit;
+    that = this;
+    cit.forEach(function(item){
+        item.picUrl = that.baseUrl + item.picUrl
+    })
+  },
+  computed:{
+      cit1(){
+          return this.transform2d(this.cit); 
+      }
+  },
+  methods: {
+    open_url(event) {
+        let result = this.getElement(event);
+        let url = result.jumpUrl;
+        this._openUrl(url);
+    },
+     _openUrl(url) {
+        if (url) {
+            window.open(url)
+        }
+    }
+  },
+  data: {
+    "baseUrl":config.baseUrl,
+    "cit": config.cit,
+    "layout":config.layout,
+    "margin":config.margin,
+    "gutter":config.gutter,
+    "position":config.position,
+  }
+
+})
+</script>
+</html>

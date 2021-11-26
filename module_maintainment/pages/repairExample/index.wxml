@@ -1,0 +1,124 @@
+<!--index.wxml-->
+<view class="container-body">
+    <view class="barcode">
+          <van-field
+            value="{{ barcode }}"
+            error="{{barcodeError}}"
+            center
+            disabled
+            clearable
+            label="barcode"
+            placeholder="please enter barcode"
+            border="{{ false }}"
+            bind:click-icon = "scan"
+          >
+          </van-field>
+    </view>
+    <view class="barcode">
+        <van-field 
+            value="{{ location }}" 
+            center 
+            disabled
+            placeholder="please get the location"
+            label="location" 
+            border="{{ false }}"
+            bind:click-icon = "getLocation"
+        >
+        </van-field>
+     
+   </view>
+    <view class="before" style="background:white">
+        <van-row custom-class="">
+            <van-col span="4" custom-class="content">
+                <view class="title">
+                  BEFORE 
+                </view>
+            </van-col>
+            <van-col span="12" custom-class="content">
+                <view class="">
+                    <input 
+                        bindinput="beforeInput" 
+                        value="{{voltageB}}" 
+                        class="weui-input custom-input" 
+                        maxlength="10" 
+                        placeholder="Voltage (V)"
+                        disabled="{{true}}"
+                        />
+                 </view>
+            </van-col>
+        </van-row>
+        <van-row custom-class="">
+            <van-col span="12">
+                <view class="upload">
+                    <van-uploader 
+                      file-list="{{ fileList }}" 
+                      bind:after-read="" 
+                      max-count="1"
+                      deletable="{{ false }}"
+                      bind:delete=""
+                      preview-size="280rpx"
+                    />
+                </view>
+            </van-col>
+            <van-col span="12">
+                <view class="upload">
+                    <van-uploader 
+                      file-list="{{ fileList1 }}" 
+                      bind:after-read="" 
+                      max-count="1"
+                      deletable="{{ false }}"
+                      bind:delete=""
+                      preview-size="280rpx"
+                    />
+                </view>
+            </van-col>
+        </van-row>
+    </view>
+    <view class="before" style="background:white">
+        <van-row custom-class="">
+            <van-col span="4" custom-class="content">
+                <view class="title">
+                  AFTER
+                </view>
+            </van-col>
+            <van-col span="12" custom-class="content">
+                <view class="">
+                    <input 
+                        bindinput = "afterInput" 
+                        value="{{voltageF}}" 
+                        disabled
+                        class="weui-input custom-input"
+                        maxlength="10"
+                        placeholder="voltage (v)"
+                     />
+                </view>
+            </van-col>
+        </van-row>
+        <van-row custom-class="">
+            <van-col span="12">
+                <view class="upload">
+                    <van-uploader 
+                      file-list="{{ fileList2 }}" 
+                      bind:after-read="afterRead" 
+                      max-count="1"
+                      deletable="{{ false }}"
+                      bind:delete="deleteimage"
+                      preview-size="280rpx"
+                    />
+                </view>
+            </van-col>
+            <van-col span="12">
+                <view class="upload">
+                    <van-uploader 
+                      file-list="{{ fileList3 }}" 
+                      bind:after-read="afterRead1" 
+                      max-count="1"
+                      deletable="{{ false }}"
+                      bind:delete="deleteImage1"
+                      preview-size="280rpx"
+                    />
+                </view>
+            </van-col>
+        </van-row>
+    </view>
+</view>

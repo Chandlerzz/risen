@@ -1,0 +1,31 @@
+<!-- pages/index/index.wxml -->
+<wxs src="../../filters/date.wxs" module="date" />
+<scroll-view  scroll-y>
+    <view class="" bindtap="scan">
+        <van-search
+             value="{{ value }}"
+             shape="round"
+             disabled
+             background=""
+             placeholder="scan"
+             right-icon="scan"
+             bind:click-input = "scan"
+        />
+    </view>
+    <van-row gutter="20" custom-class="menu">
+        <van-col span="{{24 / navigations.length}}" custom-class="menu__item"  wx:key="item" wx:for="{{navigations}}">
+            <koo-image-button image="{{item.url}}" text="{{item.name}}"
+                              data-row="{{item}}" bindtap="swiperClick" />
+        </van-col>
+    </van-row>
+
+    <koo-block  wx:if ="{{recentRepiairs.length > 0}}" title="Latest Repair Bill">
+            <block wx:key="id" wx:for="{{ recentRepiairs }}">
+                <koo-repair 
+                    wx:if="{{item.state}}" 
+                    item="{{item}}"
+                    bind:tap="showLesson">
+                </koo-repair>
+            </block>
+    </koo-block>
+</scroll-view>

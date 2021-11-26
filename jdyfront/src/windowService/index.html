@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum=1.0,minimum=1.0,user-scalable=0">
+<title>日升综合服务窗</title>
+  <!-- import CSS -->
+  <link rel="stylesheet" href="https://object.risen.com/public/resources/element-ui/2.15.5/lib/theme-chalk/index.css"  charset="utf-8">
+    <script src="https://object.risen.com/public/resources/jquery/3.6.0/jquery-3.6.0.min.js"></script>
+<style>
+html, body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    position: relative;
+}
+@media screen and (min-device-width:800px){
+    html, body {
+        margin:0 10vw;
+        background-color: rgb(244, 249, 249);
+    }
+}
+.container_background{
+    background:white;
+}
+.card-5 {
+    /*display: flex;*/
+    position: relative;
+    align-items: center;
+    align-self: center;
+    text-align:center;
+    flex-direction: row;
+    margin-top: 18.47vw;
+    height: 5.2vw;
+    line-height: 3.73vw;
+    color: #0d0d0d;
+}
+.caption-1 {
+    font-size: 3.73vw;
+    font-weight: 400;
+}
+</style>
+</head>
+<body>
+  <div id="app" class="container_background" >
+    <div>
+        <img :src="screenWidth>800?bannerPicUrl1:bannerPicUrl" style="height: 100%;width: 100%;background-size: 100% 100%;margin: 0px">
+    </div>
+      <div>
+          <two-col
+              :gutter="gutter"
+              :cit="cit1"
+              :margin="margin"
+              :layout="layout"
+              v-on:open_url="open_url">
+          </two-col>
+          <rolling-ball
+              :position="position"
+          ></rolling-ball>
+      </div>
+      <div>
+        <img :src="footerPicUrl"  style="height: 100%;width: 100%;background-size: 100% 100%;margin: 50px 0px 0px 0px;">
+  </div>
+    <div class="card-5 ">
+        <span class="caption-1">
+            东方日升集团主办 
+        </span>
+    </div>
+</body>
+<script src="https://object.risen.com/jdyapp/public/js/jdy_mixin.js"></script>
+<script src="https://object.risen.com/jdyapp/public/js/twoCol.js"></script>
+<script src="https://object.risen.com/jdyapp/public/js/rollingBall.js"></script>
+  <!-- import Vue before Element -->
+<script src="https://object.risen.com/public/resources/vue/2.6.14/dist/vue.min.js"></script>
+<script src="https://object.risen.com/public/resources/vue-router/3.5.2/dist/vue-router.min.js"></script>
+<!-- import JavaScript -->
+<script src="https://object.risen.com/public/resources/element-ui/2.15.5/lib/index.js"></script>
+<script>
+var config ={
+  baseUrl:"https://object.risen.com/jdyapp/windowService/images/",
+  bannerPicUrl:"banner@3x.png",
+  bannerPicUrl1:"resize.png",
+  footerPicUrl:"slogan@3x.png",
+  cit: [
+      {
+        id:1,
+        picUrl:"TIAN.jpg",
+        jumpUrl:"https://tqs0cvli0t.jiandaoyun.com/f/5fe051ce5fab94000707a5d4",
+      },
+      {
+        id:2,
+        picUrl:"complaint@3x.png",
+        jumpUrl:"https://tqs0cvli0t.jiandaoyun.com/f/6052cc3dca766e0008a84924",
+      },
+      {
+        id:3,
+        picUrl:"consult@3x.png?1",
+        jumpUrl:"https://tqs0cvli0t.jiandaoyun.com/f/6054507861e02100073d8538",
+      },
+      {
+        id:4,
+        picUrl:"suggest@3x.png",
+        jumpUrl:"https://tqs0cvli0t.jiandaoyun.com/f/6053efee2a69030009cbfc2c",
+      },
+      {
+        id:5,
+        picUrl:"question@3x.png?2",
+      },
+      {
+        id:6,
+        picUrl:"special@3x.png",
+        jumpUrl:"https://tqs0cvli0t.jiandaoyun.com/f/6080e3336f33ae000791a685",
+      },
+      {
+        id:7,
+        picUrl:"inquiry@3x.png",
+        jumpUrl:"https://tqs0cvli0t.jiandaoyun.com/q/60545081ae5140000724c067",
+      },
+      {
+        id:8,
+        picUrl:"lz@3x.png",
+        jumpUrl:"https://tqs0cvli0t.jiandaoyun.com/f/60fa585f7b98b10008071337",
+      },
+    ],
+    gutter:"20",
+    layout:{
+        xs:[0,11,11,0],
+        sm:[0,11,11,0],
+        md:[0,4,4,0],
+        lg:[0,8,8,0],
+        xl:[0,4,4,0]
+    },
+    margin: "margin: 40px 0 10px 0;background:white",
+    position: "right:0px;top:200px;"
+};
+var app = new Vue({
+  el: '#app',
+  mixins: [jdy_mixin],
+  components: {TwoCol,RollingBall},
+  created(){
+    const cit = this.cit;
+    that = this;
+    cit.forEach(function(item){
+        item.picUrl = that.baseUrl + item.picUrl
+    })
+    this.bannerPicUrl = this.baseUrl + this.bannerPicUrl;
+    this.bannerPicUrl1 = this.baseUrl + this.bannerPicUrl1;
+    this.footerPicUrl = this.baseUrl + this.footerPicUrl;
+  },
+  computed:{
+      cit1(){
+          return this.transform2d(this.cit); 
+      }
+  },
+  methods: {
+     open_url(event) {
+        let result = this.getElement(event);
+        let url = result.jumpUrl;
+        this._openUrl(url);
+     },
+     _openUrl(url){
+        if(url){
+            window.open(url);
+        }
+     }
+  },
+  data: {
+    "bannerPicUrl":config.bannerPicUrl,
+    "bannerPicUrl1":config.bannerPicUrl1,
+    "footerPicUrl":config.footerPicUrl,
+    "baseUrl":config.baseUrl,
+    "cit": config.cit,
+    "layout":config.layout,
+    "margin":config.margin,
+    "gutter":config.gutter,
+    "position":config.position,
+    "screenWidth":window.innerWidth,
+  }
+
+})
+</script>
+</html>

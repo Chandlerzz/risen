@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum=1.0,minimum=1.0,user-scalable=0">
+<title>义乌动力设施巡检平台</title>
+  <!-- import CSS -->
+  <link rel="stylesheet" href="https://object.risen.com/public/resources/element-ui/2.15.5/lib/theme-chalk/index.css"  charset="utf-8">
+  <script src="https://object.risen.com/public/resources/jquery/3.6.0/jquery-3.6.0.min.js"></script>
+<style>
+.displayNone{
+    display: none;
+}
+.toast{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-color: #000;
+    color: #fff;
+    z-index: 50;
+    padding: 5px 10px;
+    height: 20px;
+    line-height: 20px;
+    transform: translateX(-50%) translateY(-50%);
+    border-radius: 3px;
+}
+@media screen and (min-width: 600px) {
+    .wrap{
+        width: 600px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+    }
+}
+</style>
+</head>
+<body>
+  <div id="app" class="wrap">
+      <two-col
+          :gutter="gutter"
+          :cit="cit1"
+          :margin="margin"
+          :layout="layout"
+          v-on:open_url="open_url">
+      </two-col>
+      <rolling-ball
+          :position="position"
+      ></rolling-ball>
+        <div class="toast displayNone"></div>
+  </div>
+  <script>
+
+</script>
+</body>
+<script src="https://object.risen.com/jdyapp/public/js/jdy_mixin.js"></script>
+<script src="https://object.risen.com/jdyapp/public/js/twoCol.js"></script>
+<script src="https://object.risen.com/jdyapp/public/js/rollingBall.js"></script>
+  <!-- import Vue before Element -->
+<script src="https://object.risen.com/public/resources/vue/2.6.14/dist/vue.min.js"></script>
+<script src="https://object.risen.com/public/resources/vue-router/3.5.2/dist/vue-router.min.js"></script>
+<!-- import JavaScript -->
+<script src="https://object.risen.com/public/resources/element-ui/2.15.5/lib/index.js"></script>
+<script>
+var config ={
+baseUrl:"https://object.risen.com/jdyapp/powerFacilities/images/",
+     cit: [
+        {   
+            id : 1,
+            picUrl : "kyj@3x.jpg",
+            jumpUrl : "https://www.jiandaoyun.com/app/5f3107def6d1ec0006e44fcb/entry/5f3496460661c700066f8308",
+        },
+        {   
+            id : 2,
+            jumpUrl : "https://www.jiandaoyun.com/app/5f3107def6d1ec0006e44fcb/entry/5f34959024847a0006212ddb",
+            picUrl : "lxg@3x.jpg",
+        },
+        {   
+            id : 3,
+            picUrl : "fqp@3x.jpg",
+            jumpUrl: "https://www.jiandaoyun.com/app/5f3107def6d1ec0006e44fcb/entry/5f45d52a6344180006bf6bbc",
+        },
+        {   
+            id : 4,
+            picUrl : "lxs@3x.jpg",
+            jumpUrl: "https://www.jiandaoyun.com/app/5f3107def6d1ec0006e44fcb/entry/5f475a7566ce020006c8b2eb",
+        },
+    ],
+    gutter:"20",
+    layout:{
+        xs:[0,12,12,0],
+        sm:[0,12,12,0],
+        md:[0,8,8,0],
+        lg:[0,8,8,0],
+        xl:[0,8,8,0]
+    },
+    margin: "margin: 5px 0 5px 0",
+    position: "right:0px;top:200px;"
+}
+var app = new Vue({
+  el: '#app',
+  // getElement,transform2d from jdy_mixin
+  mixins: [jdy_mixin],
+  components: {TwoCol,RollingBall},
+  created(){
+    const cit = this.cit;
+    that = this;
+    cit.forEach(function(item){
+        item.picUrl = that.baseUrl + item.picUrl
+    })
+  },
+  computed:{
+      cit1(){
+          return this.transform2d(this.cit); 
+      }
+  },
+  methods: {
+    open_url(event) {
+        let result = this.getElement(event);
+        let url = result.jumpUrl;
+        this._openUrl(url);
+    },
+     _openUrl(url) {
+        if (url) {
+            window.open(url)
+        }
+    }
+  },
+  data: {
+    "baseUrl":config.baseUrl,
+    "cit": config.cit,
+    "layout":config.layout,
+    "margin":config.margin,
+    "gutter":config.gutter,
+    "position":config.position,
+  }
+
+})
+</script>
+</html>

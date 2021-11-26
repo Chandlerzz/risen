@@ -1,0 +1,105 @@
+<!--index.wxml-->
+<view class="container-body">
+    <view class="barcode">
+          <van-field
+            value="{{ barcode }}"
+            error="{{barcodeError}}"
+            center
+            disabled
+            clearable
+            label="barcode"
+            placeholder="please enter barcode"
+            border="{{ false }}"
+            bind:click-icon = "scan"
+          >
+          </van-field>
+    </view>
+    <view class="barcode">
+        <van-field 
+            value="{{ location }}" 
+            center 
+            disabled
+            placeholder="please get the location"
+            label="location" 
+            right-icon="location"
+            border="{{ false }}"
+            bind:click-icon = "getLocation"
+        >
+        </van-field>
+     
+   </view>
+    <view class="before" style="background:white">
+        <van-row custom-class="">
+            <view class="content">
+                BEFORE: {{voltageB}} V
+            </view>
+        </van-row>
+        <van-row custom-class="">
+            <van-col span="12">
+                <view class="upload">
+                    <van-uploader 
+                      file-list="{{ fileList }}" 
+                      bind:after-read="" 
+                      max-count="1"
+                      deletable="{{ false }}"
+                      bind:delete=""
+                      preview-size="280rpx"
+                    />
+                </view>
+            </van-col>
+            <van-col span="12">
+                <view class="upload">
+                    <van-uploader 
+                      file-list="{{ fileList1 }}" 
+                      bind:after-read="" 
+                      max-count="1"
+                      deletable="{{ false }}"
+                      bind:delete=""
+                      preview-size="280rpx"
+                    />
+                </view>
+            </van-col>
+        </van-row>
+    </view>
+    <view  wx:if = "{{state === 2}}" class="before" style="background:white">
+        <van-row custom-class="">
+            <van-col span="4" custom-class="content">
+                <view class="title">
+                  AFTER
+                </view>
+            </van-col>
+            <van-col span="12" custom-class="content">
+            <view class="content">
+                BEFORE: {{voltageF}} V
+            </view>
+            </van-col>
+        </van-row>
+        <van-row custom-class="">
+            <van-col span="12">
+                <view class="upload">
+                    <van-uploader 
+                      file-list="{{ fileList2 }}" 
+                      bind:after-read="afterRead" 
+                      max-count="1"
+                      bind:delete="deleteimage"
+                      preview-size="280rpx"
+                    />
+                </view>
+            </van-col>
+            <van-col span="12">
+                <view class="upload">
+                    <van-uploader 
+                      file-list="{{ fileList3 }}" 
+                      bind:after-read="afterRead1" 
+                      max-count="1"
+                      bind:delete="deleteImage1"
+                      preview-size="280rpx"
+                    />
+                </view>
+            </van-col>
+        </van-row>
+    </view>
+    <view wx:if="{{state===1}}" class="koo-inline-container--center save_button">
+    <van-button round size="large" custom-class="" color="#1e3485" bind:click="edit">E D I T</van-button>
+    </view>
+</view>

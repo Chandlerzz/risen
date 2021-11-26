@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum=1.0,minimum=1.0,user-scalable=0">
+<title>设备管理与巡检平台</title>
+  <!-- import CSS -->
+  <link rel="stylesheet" href="https://object.risen.com/public/resources/element-ui/2.15.5/lib/theme-chalk/index.css"  charset="utf-8">
+  <script src="https://object.risen.com/public/resources/jquery/3.6.0/jquery-3.6.0.min.js"></script>
+<style>
+.one{
+    margin:8px 0px 0px 0px;
+}
+.phone{
+    clear: both;
+    padding-top: 20px;
+    text-align: center;
+    color: #000;
+    font-size: 20px;
+}
+.code{
+    clear: both;
+    padding-top: 20px;
+    text-align: center;
+    color: #000;
+    font-size: 16px;
+}
+.phone a{
+    color: #000;
+    text-decoration: none;
+}
+@media screen and (min-width: 600px) {
+    .wrap{
+        width: 600px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+    }
+}
+</style>
+</head>
+<body>
+  <div id="app" class="wrap">
+      <one-col
+          :gutter="gutter"
+          :cit="cit"
+          :margin="margin"
+          :layout="layout"
+          v-on:open_url="open_in">
+      </one-col>
+      <rolling-ball
+          :position="position"
+      ></rolling-ball>
+  </div>
+  <script>
+
+</script>
+</body>
+<script src="https://object.risen.com/jdyapp/public/js/jdy_mixin.js"></script>
+<script src="https://object.risen.com/jdyapp/public/js/oneCol.js"></script>
+<script src="https://object.risen.com/jdyapp/public/js/rollingBall.js"></script>
+  <!-- import Vue before Element -->
+<script src="https://object.risen.com/public/resources/vue/2.6.14/dist/vue.min.js"></script>
+<script src="https://object.risen.com/public/resources/vue-router/3.5.2/dist/vue-router.min.js"></script>
+<!-- import JavaScript -->
+<script src="https://object.risen.com/public/resources/element-ui/2.15.5/lib/index.js"></script>
+<script>
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+        if (r != null) return unescape(r[2]); return null; //返回参数值
+    }
+    $('.code').html('设备编号：' + getUrlParam('ext'))
+</script>
+<script>
+var config={
+    baseUrl:"https://object.risen.com/jdyapp/equipmentManagement/images/",
+    cit : [
+        {   
+            id : 1,
+            picUrl : "bxwx@3x.png",
+            flag :"bxwx",
+        },
+        {   
+            id : 2,
+            picUrl : "bpbj@3x.png",
+            flag :"bpbj",
+        },
+        {   
+            id : 3,
+            picUrl : "cggl@3x.png",
+            flag :"cggl",
+        },
+        {   
+            id : 4,
+            picUrl : "djxj@3x.png",
+            flag :"djxj",
+        },
+    ],
+    gutter:"20",
+    layout:{
+        xs:[0,22,0],
+        sm:[0,22,0],
+        md:[0,18,0],
+        lg:[0,18,0],
+        xl:[0,18,0]
+    },
+    margin: "margin: 0 0 0 0",
+    position: "right:0px;top:200px;"
+}
+var app = new Vue({
+  el: '#app',
+  // getElement,transform2d from jdy_mixin
+  mixins: [jdy_mixin],
+  components: {OneCol,RollingBall},
+  created(){
+    const cit = this.cit;
+    that = this;
+    cit.forEach(function(item){
+        item.picUrl = that.baseUrl + item.picUrl
+    })
+  },
+  methods: {
+    open_in(event) {
+        let result = this.getElement(event);
+        let url = result.jumpUrl;
+        let flag = result.flag;
+        this._openIn(flag);
+    },
+    _openIn(flag) {
+        let href = location.href
+        let array = href.split('/')
+        array.splice(array.length - 1, 1)
+        href = array.join('/')
+        console.log(href)
+        //location.href = `${href}/home.html?flag=${flag}`
+        location.href = `${href}/v1/jdy_equipment_management_home?flag=${flag}`
+    }
+  },
+  data: {
+    "baseUrl":config.baseUrl,
+    "cit": config.cit,
+    "layout":config.layout,
+    "margin":config.margin,
+    "gutter":config.gutter,
+    "position":config.position,
+  }
+
+})
+</script>
+</html>

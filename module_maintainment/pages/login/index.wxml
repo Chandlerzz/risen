@@ -1,0 +1,12 @@
+<view class="">
+  <van-cell-group>
+      <van-field value="{{account}}"  clearable label="name" placeholder="name" bind:change="nameOnChange"  >
+      </van-field>
+      <van-field value="{{password}}"  clearable label="passward" placeholder="passward"  bind:change="passwordOnChange" >
+      </van-field>
+  </van-cell-group>
+  <view class='koo-inline-container--center register-wrapper'>
+    <van-button round size="large" custom-class="" color="#1e3485" bind:click="isAuthorize">登录</van-button>
+  </view>
+  <van-notify id="van-notify" />
+</view>

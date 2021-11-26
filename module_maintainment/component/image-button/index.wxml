@@ -1,0 +1,6 @@
+<!--component/imageButton/index.wxml-->
+<view bindtap="onTap">
+    <image src="{{image}}" class="custom-class icon" bindtap="onTap"/>
+    <view class="text-class" bindtap="onTap">{{text}}</view>
+
+</view>

@@ -1,0 +1,57 @@
+/* pages/userInfo/userInfo.wxss */
+.container {
+  padding: 45px 0px 20px;
+}
+
+
+.logo,
+.title-text {
+  display: inline-block;
+  vertical-align: middle;
+}
+.register-wrapper {
+  margin-top: 20rpx;
+}
+.register-button{
+  width:350rpx;
+}
+.button{
+  background-color:#1e3485;
+	color:#FFFFFF;
+}
+.bottom_button{
+  padding-left:7px;
+  padding-right:7px;
+}
+.title {
+  padding-left: 15px;
+  margin-bottom: 10px;
+}
+
+.title-text {
+  font-size: 38rpx;
+  font-weight: 500;
+  margin-left: 15px;
+}
+
+.logo {
+  width: 36px;
+  height: 36px;
+}
+
+.desc {
+  font-size: 14px;
+  color: #7d7e80;
+  margin: 0 0 45px;
+  padding-left: 15px;
+}
+.blank{
+  height:20px;
+}
+
+.van-field__label--disabled{
+    color:black!important;
+}
+.test{
+
+}

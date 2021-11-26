@@ -1,0 +1,41 @@
+<!-- pages/repairList/index.wxml -->
+<wxs src="../../filters/date.wxs" module="date" />
+<scroll-view  scroll-y>
+    <searchBar id="searchBar"  inputFocus="true" searchflag="true" placeholderValue="please enter the barcode" bind:cancelsearch="cancelsearch"  bind:endsearchList="endsearchList" >
+    </searchBar>
+    <van-tabs color="#7989B7" active="{{ currentTabsIndex }}" bind:change="changeCurrentTabsIndex">
+        <van-tab title="TODO"></van-tab>
+        <van-tab title="DONE"></van-tab>
+    </van-tabs>
+    <view wx:if="{{lists.length===0}}" class="">
+     NO ITEMS  
+    </view>
+     <view wx:else class="">
+        <van-collapse value="{{ activeNames }}" bind:change="onChange">
+            <van-collapse-item name="{{item.id}}" value="{{item.barcode}}" wx:key="item" wx:for="{{lists}}">
+              <van-row>
+                  <van-col offset="22" span="2">
+                      <view wx:if="{{state === 1}}" class="edit" data-name="{{item.order_id}}" bindtap="edit">
+                        edit
+                      </view>
+                  </van-col>
+              </van-row>
+              <view slot="title">{{date.OrderIdtoDate(item.order_id)}}<van-icon name="" /></view>
+            <van-row>
+                <van-col span="12">
+                    <view class="cllapse-item-title">
+                    Before Repair: {{item.voltageB}} V
+                    </view>
+                    <van-image width="100" height="100" src="https://object.risen.com/risen-repair-img/{{item.imageB}}" />
+                </van-col>
+                <van-col span="12">
+                    <view class="cllapse-item-title">
+                    After  Repair: {{item.voltageF}} V
+                    </view>
+                    <van-image width="100" height="100" src="https://object.risen.com/risen-repair-img/{{item.imageF}}" />
+                </van-col>
+            </van-row>
+          </van-collapse-item>
+        </van-collapse>
+    </view>   
+</scroll-view>

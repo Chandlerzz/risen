@@ -1,0 +1,44 @@
+<wxs src="../../filters/date.wxs" module="date" />
+<view class="custom-class card" hidden="{{hidden}}">
+<!--  todo 这里修改了css的class的名称，统一为card__panel-->
+  <view class="{{isLastItem?'card__panel':'card__panel'}}">
+    <view class="card__header">
+      <view class="title">barcode {{ item.barcode }}</view>
+    </view>
+    <view class="card__body">
+      <view class="card__footer">
+        <view class="field">
+          <text class="field__class">STATE: {{item.state===1?"TODO":"DONE"}}</text>
+        </view>
+        <view class="field">
+          <text class="field__class"></text>
+        </view>
+      </view>
+      <!--  todo 此处增加了箭头符号的icon样式-->
+      <view wx:if="{{flag}}" class="icon__right">
+        <image class="icon" src="../../images/image/arrow-right.svg" />
+      </view>
+      <view  class="field">
+        <view class="icon__wrapper">
+          <image class="icon" src="../../images/image/js@3x.png" />
+        </view>
+        <view class="field__label">Operator:</view>
+        <view class="field__value">{{ item.account?item.account:"" }}</view>
+      </view>
+      <view  class="field">
+        <view class="icon__wrapper">
+          <image class="icon" src="../../images/image/location@3x.png" />
+        </view>
+        <view class="field__label">location:{{ item.location }}</view>
+        <view class="field__value"></view>
+      </view>
+      <view  class="field">
+        <view class="icon__wrapper">
+          <image class="icon" src="../../images/image/time@3x.png" />
+        </view>
+        <view class="field__label">Create On:</view>
+        <view class="field__value" >{{ date.OrderIdtoDate(item.order_id) }} </view>
+      </view>
+    </view>
+ </view>
+</view>

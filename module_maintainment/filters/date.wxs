@@ -1,0 +1,22 @@
+var OrderIdtoDate = function(orderId) {
+    var year, month, day, hour, minute, second;
+    var arr = [];
+    var arr1 = orderId2arr(orderId,arr);
+    [year,month,day,hour,minute,second] = arr1;
+    var date = year+"-"+month+"-"+day+" "+hour+":"+minute+":"+second
+    return date
+}
+function orderId2arr(str,arr){
+    var slice = str.slice(-2)
+    str = str.slice(0,-2)
+    arr.unshift(slice)
+    if(str.length === 4){
+    arr.unshift(str)
+    return arr
+}
+    return orderId2arr(str,arr)
+}
+module.exports = {
+    OrderIdtoDate:OrderIdtoDate,
+};
+

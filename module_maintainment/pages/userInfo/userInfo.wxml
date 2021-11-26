@@ -1,0 +1,4 @@
+<!--pages/userInfo/userInfo.wxml-->
+  <view class='koo-inline-container--center' style="margin:20px 0;">
+      <van-button type="default" size="large" bind:click="login_out">login out</van-button>
+</view>

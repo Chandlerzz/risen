@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum=1.0,minimum=1.0,user-scalable=0">
+<title>测试</title>
+  <!-- import CSS -->
+  <link rel="stylesheet" href="https://object.risen.com/public/resources/element-ui/2.15.5/lib/theme-chalk/index.css"  charset="utf-8">
+<style>
+html, body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    position: relative;
+}
+.card-5 {
+    /*display: flex;*/
+    position: relative;
+    align-items: center;
+    align-self: center;
+    text-align:center;
+    flex-direction: row;
+    margin-top: 18.47vw;
+    height: 5.2vw;
+    line-height: 3.73vw;
+    color: #0d0d0d;
+}
+.caption-1 {
+    font-size: 3.73vw;
+    font-weight: 400;
+}
+</style>
+</head>
+<body>
+  <div id="app" >
+    <div>
+        <img :src="bannerPicUrl" style="height: 100%;width: 100%;background-size: 100% 100%;margin: 0px">
+    </div>
+      <div>
+          <three-col
+              :gutter="gutter"
+              :cit="cit1"
+              :margin="margin"
+              :layout="layout"
+              v-on:open_url="open_url">
+          </three-col>
+      </div>
+</body>
+<script src="https://object.risen.com/public/resources/static/js/jdy_mixin.js"></script>
+<script src="https://object.risen.com/public/resources/static/js/threeCol.js"></script>
+  <!-- import Vue before Element -->
+<script src="https://object.risen.com/public/resources/vue/2.6.14/dist/vue.min.js"></script>
+<script src="https://object.risen.com/public/resources/vue-router/3.5.2/dist/vue-router.min.js"></script>
+<!-- import JavaScript -->
+<script src="https://object.risen.com/public/resources/element-ui/2.15.5/lib/index.js"></script>
+<script>
+var config ={
+  baseUrl:"https://object.risen.com/jdyapp/jdyMiniApp/images/",
+  bannerPicUrl:"banner@3x.jpg",
+  cit: [
+      {
+        id:1,
+        picUrl:"ssgl@3x.png",
+        jumpUrl:"https://esbtest.risen.com/dev/v1/jdy_dormitory_manage",
+      },
+      {
+        id:2,
+        picUrl:"yqt@3x.png",
+        jumpUrl:"https://esbtest.risen.com/dev/v1/jdy_epedimic",
+      },
+      {
+        id:3,
+        picUrl:"rslz@3x.png",
+        jumpUrl:"https://esbtest.risen.com/dev/v1/jdy_risen_report",
+      },
+      {
+        id:4,
+        picUrl:"zhfwc@3x.png",
+        jumpUrl:"https://esbtest.risen.com/dev/v1/jdy_window_service",
+      },
+      {
+        id:5,
+        picUrl:"szpj@3x.png",
+        jumpUrl:"https://esbtest.risen.com/dev/v1/jdy_job_report",
+      },
+      {
+        id:6,
+        picUrl:"xnhzy@3x.png",
+        jumpUrl:"https://esbtest.risen.com/dev/v1/jdy_resource_management",
+      },
+      {
+        id:7,
+        picUrl:"sbgl@3x.png",
+        jumpUrl:"https://esbtest.risen.com/dev/v1/jdy_equipment_management_index",
+      },
+      {
+        id:8,
+        picUrl:"sbwx@3x.png",
+        jumpUrl:"https://esbtest.risen.com/dev/v1/jdy_equipment_maintenance_platform",
+      },
+      {
+        id:9,
+        picUrl:"cgxbj@3x.png",
+        jumpUrl:"https://esbtest.risen.com/dev/v1/jdy_price_comparison",
+      },
+      {
+        id:10,
+        picUrl:"sylz@3x.png",
+        jumpUrl:"https://esbtest.risen.com/dev/v1/jdy_shuangyu_report",
+      },
+      {
+        id:11,
+        picUrl:"ywxj@3x.png",
+        jumpUrl:"https://esbtest.risen.com/dev/v1/jdy_power_facilities",
+      },
+      {
+        id:12,
+        picUrl:"jggy@3x.png",
+        jumpUrl:"https://esbtest.risen.com/dev/v1/jdy_juguang_window_service",
+      },
+    ],
+    gutter:"10",
+    layout:{
+        xs:[1,8,8,8,1],
+        sm:[1,6,6,6,1],
+        md:[0,6,6,6,0],
+        lg:[0,6,6,6,0],
+        xl:[0,6,6,6,0],
+    },
+    margin: "margin: 30px 0 20px 0",
+};
+var app = new Vue({
+  el: '#app',
+  mixins: [jdy_mixin],
+  components: {ThreeCol},
+  created(){
+    const cit = this.cit;
+    that = this;
+    cit.forEach(function(item){
+        item.picUrl = that.baseUrl + item.picUrl
+    })
+    this.bannerPicUrl = this.baseUrl + this.bannerPicUrl;
+  },
+  computed:{
+      cit1(){
+          return this.transform3l(this.cit); 
+      }
+  },
+  methods: {
+     open_url(event) {
+        let result = this.getElement(event);
+        let url = result.jumpUrl;
+        this._openUrl(url);
+     },
+     _openUrl(url){
+        if(url){
+            window.location=url;
+        }
+     }
+  },
+  data: {
+    "bannerPicUrl":config.bannerPicUrl,
+    "footerPicUrl":config.footerPicUrl,
+    "baseUrl":config.baseUrl,
+    "cit": config.cit,
+    "layout":config.layout,
+    "margin":config.margin,
+    "gutter":config.gutter,
+  }
+
+})
+</script>
+</html>

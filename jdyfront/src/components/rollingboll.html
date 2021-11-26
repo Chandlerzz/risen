@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+  <script src="https://object.risen.com/public/resources/jquery/3.6.0/jquery-3.6.0.min.js"></script>
+    <title>悬浮球</title>
+</head>
+<body>
+    <div id="home"  style="width: 60px;height: 60px;position: fixed;left: 0px;top: 60px ;background:white;border-radius:50%;text-align:center;box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;">
+        <span style="height:100%;display:inline-block;vertical-align:middle;"></span>
+        <img style="width: 38px;vertical-align:middle; " src="yyzx@3x.png">
+    </div>
+
+    <script type="text/javascript">
+                var _x_start,_y_start,_x_move,_y_move,_x_end,_y_end,left_start,top_start;
+                //按下
+                document.getElementById("home").addEventListener("touchstart",function(e)
+                {   
+                    _x_start=e.touches[0].pageX;//起始点击位置
+                    _y_start=e.touches[0].pageY;//起始点击位置
+                    left_start=$("#home").css("left");//元素左边距
+                    top_start=$("#home").css("top");//元素上边距
+                });
+                //移动
+                document.getElementById("home").addEventListener("touchmove",function(e)
+                {   
+                    e.preventDefault();//取消事件的默认动作。
+                    _x_move=e.touches[0].pageX;//当前屏幕上所有触摸点的集合列表
+                    _y_move=e.touches[0].pageY;//当前屏幕上所有触摸点的集合列表
+                    //左边距=当前触摸点-鼠标起始点击位置+起始左边距
+                    $("#home").css("left",parseFloat(_x_move)-parseFloat(_x_start)+parseFloat(left_start)+"px");
+                    //上边距=当前触摸点-鼠标起始点击位置+起始上边距
+                    $("#home").css("top",parseFloat(_y_move)-parseFloat(_y_start)+parseFloat(top_start)+"px");
+                });
+                //松开
+                document.getElementById("home").addEventListener("touchend",function(e)
+                {
+                    var divHeight = $("#home").outerHeight();
+                    var bodyAll=$(window).width()-divHeight;//屏幕宽的一半
+                    var bodyH=$(window).height();//屏幕高
+                    var _x_end=e.changedTouches[0].pageX;//松开位置
+                    var _y_end=e.changedTouches[0].pageY;//松开位置
+                    var divH= $("#home").height();//元素高
+                    var divW= $("#home").width();//元素宽
+                    //当最终位置在屏幕左半部分
+                    if(_x_end<divHeight){
+                        $("#home").css("left","0px");
+                    }else if(_x_end>=$(window).width()-divHeight){//当最终位置在屏幕左半部分
+                        $("#home").css("left",bodyAll+"px");
+                    }
+                    //当元素顶部在屏幕外时
+                    if(parseFloat($("#home").css("top"))<0){
+                        //置于顶部
+                        $("#home").css("top",0);//置于顶部
+                    }
+                    //当元素底部在屏幕外时
+                    if(bodyH-_y_end<parseFloat(divH)/2){
+                        //置于底部
+                        $("#home").css("top",bodyH-parseFloat(divH))
+                    }
+                });
+        $("#home").click(function(){
+            console.log('点击');
+            window.history.back();
+        });
+
+    </script>
+</body>
+</html>
+
