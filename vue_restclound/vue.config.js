@@ -1,6 +1,6 @@
 
 module.exports={
-    publicPath: process.env.NODE_ENV === 'production' ? 'https://object.risen.com/public/dist' : '', // 正式环境/本地开发环境
+    publicPath: process.env.NODE_ENV === 'production' ? 'https://object.risen.com/repairadmin/dist' : '', // 正式环境/本地开发环境
     devServer: {
         host: process.env.VUE_APP_PROXY_HOST,
         port: process.env.VUE_APP_PROXY_PORT,
@@ -26,6 +26,14 @@ module.exports={
         historyApiFallback: {
             // index: url.parse(options.dev ? '/assets/' : publicPath).pathname
         }
+    },
+    css: {
+        modules: false,
+        loaderOptions: {
+            sass: {
+                data: `@import "@/styles/index.scss";`,
+            },
+        },
     },
 
 }

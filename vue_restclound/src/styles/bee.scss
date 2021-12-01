@@ -1,0 +1,55 @@
+//左右浮动
+.b-pull-left {
+  float: left;
+}
+
+.b-pull-right {
+  float: right;
+}
+
+//文本内容对齐方式
+.b-text-left {
+  text-align: left;
+}
+
+.b-text-right {
+  text-align: right;
+}
+
+.b-text-center {
+  text-align: center;
+}
+
+//高度20px的空白间隔
+.b-white-space {
+  height: 20px;
+}
+//宽度
+.b-full-width {
+  width: 100% !important;
+}
+.b-half-width {
+  width: 50% !important;
+}
+//h3-title的字体大小
+.b-h3-title {
+  font-size: 16px;
+}
+.b-h4-title {
+  font-size: 18px;
+}
+//字体加粗
+.b-font-bold {
+  font-weight: bold;
+}
+//标准颜色
+.b-light-blue {
+  color: #589cf5;
+}
+.b-red {
+  color: #f56c6c;
+}
+
+.b-button-left-margin {
+  margin-left: 10px;
+}

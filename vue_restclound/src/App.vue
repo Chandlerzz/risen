@@ -1,5 +1,5 @@
     <template>
-      <div id="app">
+  <div id="app" class="WhiteScroll">
         <keep-alive :include="arr">
           <router-view></router-view>
         </keep-alive>
@@ -45,3 +45,41 @@
       }
     </script>
 
+<style lang="scss">
+  @import "./styles/public";
+  #app {
+    height: 100%;
+  }
+  /*谷歌、safari、qq浏览器、360浏览器滚动条样式 -- 白色样式*/
+  .WhiteScroll{
+      &, & .el-table__body-wrapper{
+          /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+          &::-webkit-scrollbar
+          {
+              width: 8px; height: 8px;
+          }
+          /*定义滚动条轨道 内阴影+圆角*/
+          &::-webkit-scrollbar-track
+          {
+              border-radius: 10px;
+              background-color: #f1f1f1;
+          }
+          /*定义滑块 内阴影+圆角*/
+          &::-webkit-scrollbar-thumb
+          {
+              border-radius: 10px;
+              background-color: #ddd;
+          }
+          /*滑块效果*/
+          &::-webkit-scrollbar-thumb:hover
+          {
+              border-radius: 5px;
+          }
+          /*滚动条交汇处*/
+          &::-webkit-scrollbar-corner{
+              background-color: #f1f1f1;
+          }
+      }
+  }
+
+</style>

@@ -1,0 +1,36 @@
+/*上传图片*/
+.avatar-uploader {
+  .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+}
+.wrap .avatar{
+  width: auto!important;
+  max-width: 600px;
+}
+/*详情页的内容链接*/
+.el-form-item__content{
+  word-break: break-all;
+}
+
+/*富文本编辑器样式*/
+.ck-content{
+  max-height: 600px;
+  min-height: 200px;
+  border-color: #ddd!important;
+  overflow-y: auto;
+  line-height: 26px;
+}
+/*问卷管理 label*/
+.squestionnair .area{
+  .el-form-item__label{
+    width: 80px!important;
+  }
+  .el-form-item__content{
+    margin-left: 80px!important;
+  }
+}

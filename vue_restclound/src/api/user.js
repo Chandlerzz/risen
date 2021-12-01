@@ -34,8 +34,12 @@ export async function getDingTalkUserName() {
 }
 
 export async function getAccount() {
+  let url="/api/query_account"
+  if(process.env.NODE_ENV === 'production'){
+      url = "/dev/risen_module_maintainment_and_management/query_account"
+  }
   return request({
-    url: '/api/query_account',
+    url: url,
     method: 'get',
     hideloading: true // 隐藏loading
   })

@@ -3,7 +3,7 @@
  <el-table
     :data="accountData"
     border
-    style="width:40%"
+    style="width:100%"
     >
     <el-table-column
       label="姓名"
