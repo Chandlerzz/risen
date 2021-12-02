@@ -33,7 +33,7 @@ Page({
       })
       const account = wx.getStorageSync('account') || "" ;
       const state = this.data.state;
-      const result = await get(`risen_module_maintainment_and_management/query_repairinfo_by_order_id?account=${account}&order_id=${order_id}&state=${state}`)
+      const result = await get(`query_repairinfo_by_order_id?account=${account}&order_id=${order_id}&state=${state}`)
       const barcode = result.data.data[0].barcode;
       const imageB = result.data.data[0].imageB;
       const imageB1 = result.data.data[0].imageB1;

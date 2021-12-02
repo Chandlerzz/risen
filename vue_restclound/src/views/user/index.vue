@@ -1,13 +1,30 @@
 <template>
-  <div class="hello">
+  <div class="hello"
+  v-loading="loading"
+      >
+      <el-row>
+        <el-col
+          :span="24"
+          class="b-text-right"
+          style="margin:20px  0"
+        >
+            <el-button @click="submit">SUBMIT</el-button>
+            <el-button
+              @click = "add"
+              icon="el-icon-plus"
+            />
+        </el-col>
+      </el-row>
  <el-table
     :data="accountData"
+    class="b-full-width"
     border
-    style="width:100%"
     >
     <el-table-column
-      label="姓名"
-      width="120">
+      label="name"
+      min-width="120"
+      align = "center"
+      >
       <editable-cell slot-scope="scope"
          :can-edit="scope.row.editModeEnabled"
          v-model="scope.row.name"
@@ -17,8 +34,10 @@
       </editable-cell>
     </el-table-column>
     <el-table-column
-      label="账号"
-      width="120">
+      label="account"
+      min-width="120"
+      align = "center"
+      >
       <editable-cell slot-scope="scope"
          :can-edit="scope.row.editModeEnabled"
          v-model="scope.row.account"
@@ -28,8 +47,10 @@
       </editable-cell>
     </el-table-column>
     <el-table-column
-      label="密码"
-      width="120">
+      label="password"
+      min-width="120"
+      align = "center"
+      >
         <editable-cell slot-scope="scope"
            :can-edit="scope.row.editModeEnabled"
            v-model="scope.row.password"
@@ -40,8 +61,10 @@
 
     </el-table-column>
     <el-table-column
-      label="操作者"
-      width="150">
+      label="operator"
+      min-width="120"
+      align = "center"
+      >
       <editable-cell slot-scope="scope"
          :can-edit="scope.row.editModeEnabled"
          v-model="scope.row.operator"
@@ -51,10 +74,12 @@
       </editable-cell>
     </el-table-column>
     <el-table-column
-      label="操作"
-      width="100">
+      label="action"
+      min-width="120"
+      align = "center"
+      >
       <template slot-scope="scope">
-        <el-button @click="handleClick(scope.row)" type="text" size="small">编辑</el-button>
+        <el-button @click="edit(scope.row)" type="text" size="small">edit</el-button>
       </template>
     </el-table-column>
   </el-table>
@@ -62,7 +87,7 @@
 </template>
 
 <script>
-import { getAccount } from '@/api/user';
+import { getAccount, createAndUpdateAccount  } from '@/api/user';
 import EditableCell from "@/components/EditableCell";
 export default {
     name: 'User',
@@ -73,11 +98,71 @@ export default {
         return{
            editModeEnabled:false,
             accountData:[],
+            loading:false,
         }
     },
     methods:{
-        handleClick(row) {
+        edit(row) {
+            this.accountData = this.accountData.map(item => {
+                item.editModeEnabled = false;
+                return item;
+            })
             row.editModeEnabled = true
+            
+        },
+        async submit() {
+            //test account blank
+            let filter = this.accountData.filter(item => Object.values(item).includes(""))
+            if (filter.length !== 0){
+               this.$message.error( "blank is unacceptable") 
+                return
+            }
+            //test account same
+            filter = this.accountData.map(item => item.account)
+            filter = Array.from(new Set(filter))
+            if (filter.length !== this.accountData.length){
+               this.$message.error( "account is unique") 
+                return
+            }
+
+            this.loading = true
+            for ( let index in this.accountData){
+                const account = this.accountData[index]
+                try{
+                   await createAndUpdateAccount({
+                        "name":account.name,
+                        "password":account.password,
+                        "account":account.account,
+                        "operator":account.operator,
+                        "id":account.id,
+                    })
+                }
+                catch(err){
+                    this.$message.error(err.message)
+                    this.loading = false
+                }
+            }
+            let accounts = await getAccount()
+            accounts = accounts.data
+            accounts = accounts.map(account => { 
+                account.editModeEnabled = false 
+                return account
+            })
+            this.accountData = accounts
+            this.loading = false
+        },
+        add() {
+            this.accountData = this.accountData.map(item => {
+                item.editModeEnabled = false;
+                return item;
+            })
+            this.accountData.push({
+                name:"",
+                password:"",
+                account:"",
+                operator:"",
+                editModeEnabled : true,
+            })
         },
         input(val){
             console.log(val)

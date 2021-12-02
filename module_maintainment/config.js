@@ -1,7 +1,7 @@
-const env = "test"
+const env = "prod"
 const endpoints = {
-"prod": "https://esbtest.risen.com/dev/",
-"test": "https://esbtest.risen.com/dev/",
+"prod": "https://esbtest.risen.com/dev/app_102_module_maintainment/",
+"test": "https://esbtest.risen.com/dev/app_102_module_maintainment/test/",
 }
 const publicUrl = {
   "prod": "https://object.risen.com/",

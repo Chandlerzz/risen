@@ -7,7 +7,7 @@ export async function  getRepairInfo(obj) {
     }
     let url="/api/query_repairinfo"
     if(process.env.NODE_ENV === 'production'){
-        url = "/dev/risen_module_maintainment_and_management/query_repairinfo"
+        url = "/dev/app_102_module_maintainment/query_repairinfo"
     }
     const data = await request({
     url: url+str,

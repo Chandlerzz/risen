@@ -20,7 +20,7 @@ Page({
         const account = wx.getStorageSync('account') || "" 
         const password = wx.getStorageSync('password') || ""
         try {
-            const result = await get(`risen_module_maintainment_and_management/queryaccount?account=${account}&password=${password}`)
+            const result = await get(`queryaccount?account=${account}&password=${password}`)
             if (!result.data.rows){
               wx.navigateTo({
                 url: `/pages/login/index`
@@ -46,7 +46,7 @@ Page({
         const account = wx.getStorageSync('account') || "" ;
         const barcode = null;
         const state = this.data.state;
-        const result = await get(`risen_module_maintainment_and_management/query_repairinfo?account=${account}&barcode=${barcode}&state=${state}`)
+        const result = await get(`query_repairinfo?account=${account}&barcode=${barcode}&state=${state}`)
         const lists = result.data.data;
         this.setData({
             lists:lists
@@ -84,7 +84,7 @@ Page({
         const account = wx.getStorageSync('account') || "" ;
         const barcode = e.detail;
         const state = this.data.state;
-        const result = await get(`risen_module_maintainment_and_management/query_repairinfo?account=${account}&barcode=${barcode}&state=${state}`)
+        const result = await get(`query_repairinfo?account=${account}&barcode=${barcode}&state=${state}`)
         const lists = result.data.data;
         this.setData({
             lists:lists

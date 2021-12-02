@@ -23,7 +23,7 @@ Page({
         const password = wx.getStorageSync('password') || ""
         try {
             await this.fetchData()
-            const result = await get(`risen_module_maintainment_and_management/queryaccount?account=${account}&password=${password}`)
+            const result = await get(`queryaccount?account=${account}&password=${password}`)
             if (!result.data.rows){
               wx.navigateTo({
                 url: `/pages/login/index`
@@ -71,7 +71,7 @@ Page({
         const account = wx.getStorageSync('account') || "" ;
         const barcode = null;
         const limit = 3; 
-        const result = await get(`risen_module_maintainment_and_management/query_repairinfo?account=${account}&limit=${limit}`)
+        const result = await get(`query_repairinfo?account=${account}&limit=${limit}`)
         let recentRepiairs  = [];
         recentRepiairs = result.data.data;
         recentRepiairs = recentRepiairs.map(item => { 
@@ -114,7 +114,7 @@ Page({
         const account = wx.getStorageSync('account') || "" ;
         const barcode = e.detail;
         const state = this.data.state;
-        const result = await get(`risen_module_maintainment_and_management/query_repairinfo?account=${account}&barcode=${barcode}&state=${state}`)
+        const result = await get(`query_repairinfo?account=${account}&barcode=${barcode}&state=${state}`)
         const lists = result.data.data;
         this.setData({
             lists:lists
@@ -158,7 +158,7 @@ Page({
         async success (res) {
             const account = wx.getStorageSync('account') || "" ;
             const barcode = res.result
-            const result = await get(`risen_module_maintainment_and_management/query_repairinfo?account=${account}&barcode=${barcode}`)
+            const result = await get(`query_repairinfo?account=${account}&barcode=${barcode}`)
             const data = result.data.data
             if (data.length ===0){
                 message("can not find the infomation about this barcode")

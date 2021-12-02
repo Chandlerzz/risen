@@ -163,7 +163,7 @@ afterRead1(event) {
             const voltageF = this.data.voltageF;
             const location = this.location;
             const that = this;
-            const result = await post("risen_module_maintainment_and_management/create_and_update_repairinfo",{
+            const result = await post("create_and_update_repairinfo",{
                 data:{
                     state:2,
                     order_id:order_id,

@@ -26,7 +26,7 @@ Page({
   isAuthorize:throttle( async function(){
       const account = this.data.account
       const password = this.data.password
-      const result = await get(`risen_module_maintainment_and_management/queryaccount?account=${account}&password=${password}`)
+      const result = await get(`queryaccount?account=${account}&password=${password}`)
       if (result.data.rows){
        wx.setStorageSync('account',account) 
        wx.setStorageSync('password',password) 

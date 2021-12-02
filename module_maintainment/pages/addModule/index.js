@@ -44,7 +44,7 @@ Page({
         const barcode = res.result;
         const state = 1;
         const flag = true;
-        const result = await get(`risen_module_maintainment_and_management/query_repairinfo?account=${account}&barcode=${barcode}&state=${state}`)
+        const result = await get(`query_repairinfo?account=${account}&barcode=${barcode}&state=${state}`)
         const data = result.data.data;
         if(result.data.data.length > 0) {
             const order_id = data[0].order_id;
@@ -181,7 +181,7 @@ Page({
             const voltageB = this.data.voltageB;
             const location = this.data.location;
             const that = this;
-            const result = await post("risen_module_maintainment_and_management/create_and_update_repairinfo",{
+            const result = await post("create_and_update_repairinfo",{
                 data:{
                     state:1,
                     order_id:order_id,

@@ -1,4 +1,4 @@
-import qs from 'qs'
+// import qs from 'qs'
 import request from '@/utils/request'
 import CryptoJS from 'crypto-js/crypto-js'
 
@@ -36,7 +36,7 @@ export async function getDingTalkUserName() {
 export async function getAccount() {
   let url="/api/query_account"
   if(process.env.NODE_ENV === 'production'){
-      url = "/dev/risen_module_maintainment_and_management/query_account"
+      url = "/dev/app_102_module_maintainment/query_account"
   }
   return request({
     url: url,
@@ -44,25 +44,24 @@ export async function getAccount() {
     hideloading: true // 隐藏loading
   })
 }
-export function getActivation(params) {
+
+export async function createAndUpdateAccount(params) {
+  let url="/api/create_and_update_account"
+  if(process.env.NODE_ENV === 'production'){
+      url = "/dev/app_102_module_maintainment/create_and_update_account"
+  }
   return request({
-    url: '/api/device/activation',
+    url: url,
     method: 'post',
-    data: qs.stringify(params),
+    //data: qs.stringify(params),
+    data:params,
     hideloading: true, // 隐藏loading
        headers:{
       'Content-Type':'application/json'
-  }
+      }
   })
 }
-export function getProcessInfo(params,workshop) {
-  return request({
-    url: '/api/device/processinfo?workshop='+workshop,
-    method: 'post',
-    data: qs.stringify(params),
-    hideloading: true // 隐藏loading
-  })
-}
+
 
 export function getToken() {
     return request(
