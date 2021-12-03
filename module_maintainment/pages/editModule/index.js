@@ -3,6 +3,7 @@ import loader from "../../functions/loader"
 import { get, post } from "../../functions/miniapp-api.js"
 import formatDate from '../../functions/formatDate.js'
 import message from '../../functions/message.js'
+import Notify from '../../miniprogram_npm/vant-weapp/notify/notify'
 
 // index.js
 // 获取应用实例
@@ -22,6 +23,8 @@ Page({
     imageF1:"",
     voltageB:"",
     valtageF:"",
+    voltageBError:"",
+    voltageFError:"",
     barcodeError:"",
     state:1,
     location,
@@ -206,6 +209,20 @@ afterRead3(event) {
             this.setData({
                 barcodeError: "please enter barcode"
             })
+            validate = false
+        }
+        if (isNaN(this.data.voltageB)) {
+            this.setData({
+                voltageBError: "please enter number without char on voltage"
+            })
+            Notify(this.data.voltageBError);    
+            validate = false
+        }
+        if (isNaN(this.data.voltageF)) {
+            this.setData({
+                voltageFError: "please enter number without char on voltage"
+            })
+            Notify(this.data.voltageFError);    
             validate = false
         }
         // if (!this.data.imageF || this.data.imageF === "") {

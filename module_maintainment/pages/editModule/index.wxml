@@ -44,7 +44,6 @@
                             class="weui-input custom-input" 
                             maxlength="10" 
                             placeholder="Voltage (V)"
-                            disabled="{{true}}"
                             />
                      </view>
                 </van-col>
@@ -118,4 +117,5 @@
         <van-button round size="large" custom-class="" color="#1e3485" bind:click="save">S A V E</van-button>
         </view>
     </view>
+    <van-notify id="van-notify" />
 </scroll-view>

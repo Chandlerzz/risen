@@ -7,6 +7,7 @@ import formatDate from '../../functions/formatDate.js'
 import concatDate from '../../functions/concatDate.js'
 import message from '../../functions/message.js'
 import Dialog from '../../miniprogram_npm/vant-weapp/dialog/dialog'
+import Notify from '../../miniprogram_npm/vant-weapp/notify/notify'
 // index.js
 // 获取应用实例
 const app = getApp()
@@ -19,6 +20,7 @@ Page({
     imageB:"",
     imageB1:"",
     voltageB:"",
+    voltageBError:"",
     barcodeError:"",
     location:""
   },
@@ -153,6 +155,13 @@ Page({
             this.setData({
                 barcodeError: "please enter barcode"
             })
+            validate = false
+        }
+        if (isNaN(this.data.voltageB)) {
+            this.setData({
+                voltageBError: "please enter number without char on voltage"
+            })
+            Notify(this.data.voltageBError);    
             validate = false
         }
         // if (!this.data.imageB || this.data.imageB === "") {
