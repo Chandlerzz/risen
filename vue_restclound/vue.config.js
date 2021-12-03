@@ -5,11 +5,11 @@ module.exports={
         host: process.env.VUE_APP_PROXY_HOST,
         port: process.env.VUE_APP_PROXY_PORT,
         proxy: {
-            '/api': {
+            '/app_102_module_maintainment': {
                 target: process.env.VUE_APP_SERVICE_API,
                 changeOrigin: true,
                 pathRewrite: {
-                    '^/api': process.env.VUE_APP_SERVICE_PATH_REWRITE
+                    '^/app_102_module_maintainment': process.env.VUE_APP_SERVICE_PATH_REWRITE
                 },
                 secure:false
             },

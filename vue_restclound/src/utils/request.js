@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const service = axios.create({
-  baseURL:"", //  config baseApi
+    baseURL:process.env.NODE_ENV ==="production"? "/dev":"", //  config baseApi
   //withCredentials: true, // send cookies when cross-domain requests
   timeout: 5000,// request timeout
 })

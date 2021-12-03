@@ -34,24 +34,16 @@ export async function getDingTalkUserName() {
 }
 
 export async function getAccount() {
-  let url="/api/query_account"
-  if(process.env.NODE_ENV === 'production'){
-      url = "/dev/app_102_module_maintainment/query_account"
-  }
   return request({
-    url: url,
+    url: "/app_102_module_maintainment/query_account",
     method: 'get',
     hideloading: true // 隐藏loading
   })
 }
 
 export async function createAndUpdateAccount(params) {
-  let url="/api/create_and_update_account"
-  if(process.env.NODE_ENV === 'production'){
-      url = "/dev/app_102_module_maintainment/create_and_update_account"
-  }
   return request({
-    url: url,
+    url: "/app_102_module_maintainment/create_and_update_account",
     method: 'post',
     //data: qs.stringify(params),
     data:params,

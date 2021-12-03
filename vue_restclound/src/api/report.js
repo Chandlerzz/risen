@@ -5,12 +5,8 @@ export async function  getRepairInfo(obj) {
     for( let i in obj){
         str = str + i +"="+eval("obj."+i) + "&"
     }
-    let url="/api/query_repairinfo"
-    if(process.env.NODE_ENV === 'production'){
-        url = "/dev/app_102_module_maintainment/query_repairinfo"
-    }
     const data = await request({
-    url: url+str,
+    url: "/app_102_module_maintainment/query_repairinfo"+str,
     method: 'get',
     hideloading: true // 隐藏loading
   })
