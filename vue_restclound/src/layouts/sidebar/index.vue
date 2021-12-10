@@ -29,10 +29,10 @@
         components: { SidebarItem },
         computed: {
             ...mapState([
-               'opened' 
+                'sidebar',
             ]),
             isCollapsed() {
-                return ! this.opened
+                return ! this.sidebar.opened
             },
             appName() {
                 return process.env.VUE_APP_NAME

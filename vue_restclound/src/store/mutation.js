@@ -12,17 +12,5 @@ export default  {
     [CURRENT_URI] (state,res) {
         state.current_uri=res;
     },
-    TOGGLE_SIDEBAR: state => {
-        if (state.opened ){
-            localStorage.setItem('sidebarOpened', false)
-        } else {
-            localStorage.setItem('sidebarOpened', true)
-        }
-        state.opened = ! state.opened
-    },
-    CLOSE_SIDEBAR: (state) => {
-        localStorage.setItem('sidebarOpened', false)
-        state.opened = false
-    },
 }
 

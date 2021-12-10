@@ -23,7 +23,7 @@
         },
         computed: {
             sidebar() {
-                return this.$store.state
+                return this.$store.state.sidebar
             },
             classObj() {
                 return {

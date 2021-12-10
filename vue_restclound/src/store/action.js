@@ -16,12 +16,6 @@ export default {
     let res = await getDingTalkUserName();
     commit('GET_DING_TALK_USER_NAME',res)
   },
-  ToggleSideBar: ({ commit }) => {
-      commit('TOGGLE_SIDEBAR')
-  },
-  CloseSideBar({ commit }){
-      commit('CLOSE_SIDEBAR')
-  },
 }
 
 

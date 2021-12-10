@@ -1,4 +1,4 @@
-const env = "test"
+const env = "prod"
 const endpoints = {
 "prod": "https://esbtest.risen.com/dev/app_102_module_maintainment/",
 "test": "https://esbtest.risen.com/dev/app_102_module_maintainment/test/",
