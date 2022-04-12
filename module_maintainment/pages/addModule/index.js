@@ -81,7 +81,7 @@ Page({
     const currentDate = formatDate(Date())
     // 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
     wx.uploadFile({
-      url: 'https://esbtest.risen.com/dev/risen_minio/put_object', // 仅为示例，非真实的接口地址
+      url: 'https://esbtest.risen.com/dev/app_5_minio/v1/put_object', // 仅为示例，非真实的接口地址
       filePath: file.url,
       name: 'file',
       formData: {
@@ -105,7 +105,7 @@ Page({
     const currentDate = formatDate(Date())
     // 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
     wx.uploadFile({
-      url: 'https://esbtest.risen.com/dev/risen_minio/put_object', // 仅为示例，非真实的接口地址
+      url: 'https://esbtest.risen.com/dev/app_5_minio/v1/put_object', // 仅为示例，非真实的接口地址
       filePath: file.url,
       name: 'file',
       formData: {
