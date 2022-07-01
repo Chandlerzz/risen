@@ -37,6 +37,7 @@ export async function getDingTalkUserName() {
         })
         const test = JSON.stringify(persistent_code_json);
         const test1 = JSON.parse(test);
+        debugger
         return test1;
     }
 }

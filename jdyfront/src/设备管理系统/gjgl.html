@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum=1.0,minimum=1.0,user-scalable=0">
+        <title>设备日常</title>
+        <!-- import CSS -->
+        <link rel="stylesheet" href="https://object.risen.com/public/resources/element-ui/2.15.5/lib/theme-chalk/index.css"  charset="utf-8">
+        <style>
+            html, body{
+                margin: 0;
+                padding: 0;
+                position: relative;
+            }
+            @media screen and (min-device-width:800px){
+                html, body {
+                    margin:0 10vw;
+                    background-color: rgb(244, 249, 249);
+                }
+            }
+            .container_background{
+                background:white;
+                min-height:100vh;
+            }
+            .card-5 {
+                /*display: flex;*/
+                position: relative;
+                align-items: center;
+                align-self: center;
+                text-align:center;
+                flex-direction: row;
+                margin-top: 18.47vw;
+                height: 5.2vw;
+                line-height: 3.73vw;
+                color: #0d0d0d;
+            }
+            .caption-1 {
+                font-size: 3.73vw;
+                font-weight: 400;
+            }
+        </style>
+    </head>
+<body>
+<div id="app" class="container_background" >
+    <div  v-show="isLookHead">
+        <img :src="screenWidth>800?bannerPicUrl1:bannerPicUrl" style="height: 30vh;width: 100%;background-size: 100% 100%;margin: 0px">
+    </div>
+    <div>
+        <component
+                :is="currentView"
+                :gutter="gutter"
+                :cit="cit1"
+                :margin="margin"
+                :layout="layout"
+                v-on:open_url="open_url">
+        </component>
+    </div>
+    <div v-show="isLookFoot">
+        <img :src="footerPicUrl"  style="height: 100%;width: 100%;background-size: 100% 100%;margin: 50px 0px 0px 0px;">
+    </div>
+</body>
+<script src="https://object.risen.com/jdyapp/public/js/fourCol.js"></script>
+<script src="https://object.risen.com/jdyapp/public/js/threeCol.js"></script>
+<script src="https://object.risen.com/jdyapp/public/js/twoCol.js"></script>
+<script src="https://object.risen.com/jdyapp/public/js/oneCol.js"></script>
+<!--<script src="../jdy_mixin.js"></script>-->
+<script src="https://object.risen.com/jdyapp/public/js/jdy_mixin_final.js"></script>
+<!-- import Vue before Element -->
+<script src="https://object.risen.com/public/resources/vue/2.6.14/dist/vue.min.js"></script>
+<script src="https://object.risen.com/public/resources/vue-router/3.5.2/dist/vue-router.min.js"></script>
+<!-- import JavaScript -->
+<script src="https://object.risen.com/public/resources/element-ui/2.15.5/lib/index.js"></script>
+<script>
+    var config ={
+        currentView: 'FourCol',
+        isLookHead: true, //头部图片的显示和隐藏
+        isLookFoot: false, //底部图片的显示和隐藏
+        baseUrl:"https://object.risen.com/jdyapp/equipmentDailyManagement/images/",
+        bannerPicUrl:"yt.png",
+        bannerPicUrl1:"yt.png",
+        footerPicUrl:"slogan@3x.png",
+        cit: [
+            {
+                id:1,
+                picUrl:"gjqg@3x.png",
+            },
+            {
+                id:2,
+                picUrl:"gjjy@3x.png",
+            },
+            {
+                id:3,
+                picUrl:"gjly@3x.png",
+            },
+            {
+                id:4,
+                picUrl:"gjrk@3x.png",
+            },
+            
+        ],
+        gutter:"10",
+        layout:{
+            xs:[1,8,8,8,8,1],
+            sm:[1,8,8,8,8,1],
+            md:[0,6,6,6,6,0],
+            lg:[0,6,6,6,6,0],
+            xl:[0,6,6,6,6,0],
+        },
+        margin: "margin: 10px 0 -5px 0",
+    };
+    var app = new Vue({
+        el: '#app',
+        mixins: [jdy_mixin],
+        components: {OneCol,TwoCol,ThreeCol,FourCol},
+        created(){
+            const cit = this.cit;
+            that = this;
+            cit.forEach(function(item){
+                item.picUrl = that.baseUrl + item.picUrl
+            })
+            this.bannerPicUrl = this.baseUrl + this.bannerPicUrl;
+            this.bannerPicUrl1 = this.baseUrl + this.bannerPicUrl1;
+            this.footerPicUrl = this.baseUrl + this.footerPicUrl;
+        },
+        computed:{
+            cit1(){
+                if(this.currentView == 'FourCol'){
+                    return this.transform4l(this.cit);
+                }
+                if(this.currentView == 'ThreeCol'){
+                    return this.transform3l(this.cit);
+                }
+                if(this.currentView == 'TwoCol'){
+                    return this.transform2d(this.cit);
+                }
+            }
+        },
+        methods: {
+            open_url(event) {
+                let result = this.getElement(event);
+                let url = result.jumpUrl;
+                this._openUrl(url);
+            },
+            _openUrl(url){
+                if(url){
+                    window.location=url;
+                }
+            }
+        },
+        data: {
+            "bannerPicUrl":config.bannerPicUrl,
+            "bannerPicUrl1":config.bannerPicUrl1,
+            "footerPicUrl":config.footerPicUrl,
+            "baseUrl":config.baseUrl,
+            "cit": config.cit,
+            "layout":config.layout,
+            "margin":config.margin,
+            "gutter":config.gutter,
+            "screenWidth":window.innerWidth,
+            "isLookHead": config.isLookHead,
+            "isLookFoot": config.isLookFoot,
+            "currentView": config.currentView,
+        },
+
+
+    })
+</script>
+</html>
